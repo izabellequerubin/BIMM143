@@ -1,0 +1,303 @@
+---
+title: "Class 10"
+author: "Izabelle Querubin"
+format: html
+---
+
+# Class 10: Halloween Mini-Project
+
+## 1. Importing candy data
+
+```{r}
+candy_file <- "candy-data.csv"
+
+candy = read.csv(candy_file, row.names = 1)
+head(candy)
+```
+
+#### Q1. How many different candy types are in this dataset?
+
+```{r}
+candy_types <- nrow(candy)
+candy_types
+```
+
+There are 85 different candy types.
+
+#### Q2. How many fruit candy types are in this dataset?
+
+```{r}
+fruity_candy <- sum(candy$fruity)
+fruity_candy
+```
+
+There are 38 fruity candy types.
+
+### 2. What is your favorite candy?
+
+#### Q3. What is your favorite candy in the dataset and what is it's `winpercent` value?
+
+```{r}
+candy["Nerds", ]$winpercent
+```
+
+My favorite candy is Nerds and its `winpercent` value is 55.35.
+
+#### Q4. What is the `winpercent` value for "Kit Kat"?
+
+```{r}
+candy["Kit Kat", ]$winpercent
+```
+
+The `winpercent` value for "Kit Kat" is 76.77.
+
+#### Q5. What is the `winpercent` value for "Tootsie Roll Snack Bars"?
+
+```{r}
+candy["Tootsie Roll Snack Bars", ]$winpercent
+```
+
+The `winpercent` value for "Tootsie Roll Snack Bars" is 49.65.
+
+```{r}
+library("skimr")
+skim(candy)
+```
+
+#### Q6. Is there any variable/column that looks to be on a different scale to the majority of the other columns in the dataset?
+
+The `winpercent` column stands out the most from the other columns in the dataset. The `winpercent` column has a minimum value of 0 and a maximum value of 84.18 while the other columns range from 0 to 1. This suggests that the `winpercent` column has a different scale.
+
+#### Q7. What do you think a zero and one represent for the `candy$chocolate` column?
+
+The 0 most likely stands for candy without chocolate and the 1 stands for candy that contains chocolate.
+
+#### **Q8**. Plot a histogram of `winpercent` values
+
+```{r}
+library(ggplot2)
+
+ggplot(candy, aes(x = winpercent)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", color = "black") +
+  labs(x = "Win Percentage", y = "Frequency", title = "Histogram of Win Percent Values") +
+  theme_minimal()
+```
+
+#### Q9. Is the distribution of `winpercent` values symmetrical?
+
+No, the distribution of `winpercent` values skew right.
+
+#### Q10. Is the center of the distribution above or below 50%?
+
+```{r}
+mean_winpercent <- mean(candy$winpercent)
+if (mean_winpercent > 50) {
+  center <- "above"
+} else if (mean_winpercent < 50) {
+  center <- "below"
+} else {
+  center <- "at"
+}
+center
+```
+
+The center of the distribution is above 50%.
+
+#### Q11. On average, is chocolate candy higher or lower ranked than fruit candy?
+
+```{r}
+mean_chocolate <- mean(candy$winpercent[as.logical(candy$chocolate)])
+mean_fruit <- mean(candy$winpercent[as.logical(candy$fruity)])
+
+if (mean_chocolate > mean_fruit) {
+  rank <- "higher"
+} else if (mean_chocolate < mean_fruit) {
+  rank <- "lower"
+} else {
+  rank <- "equal"
+}
+rank
+```
+
+On average, chocolate candy is ranked higher than fruit candy.
+
+#### Q12. Is this difference statistically significant?
+
+```{r}
+t.test <- t.test(candy$winpercent[as.logical(candy$chocolate)], candy$winpercent[as.logical(candy$fruity)])
+t.test
+```
+
+Because the p-value is \< 0.05 and the confidence interval (11.44563 to 22.15795) indicates the range of differences in means, the difference between chocolate candy and fruity candy is statistically significant.
+
+### 3. Overall Candy Rankings
+
+#### Q13. What are the five least liked candy types in this set?
+
+```{r}
+least_liked <- head(candy[order(candy$winpercent), ], n = 5)
+least_liked
+```
+
+The five least like candy types are Nik L Nip, Boston Baked Beans, Chiclets, Super Bubble, and Jawbusters.
+
+#### Q14. What are the top 5 all-time favorite candy types out of this set?
+
+```{r}
+top_five <- head(candy[order(candy$winpercent, decreasing = TRUE), ], n = 5)
+top_five
+```
+
+The top 5 all-time favorite candy types are Reese's Peanut Butter cup, Reese's Miniatures, Twix, Kit Kat, and Snickers.
+
+#### Q15. Make a first barplot of candy ranking based on `winpercent` values.
+
+```{r}
+ggplot(candy) +
+  aes(winpercent, rownames(candy)) +
+  geom_col(fill = "skyblue", color = "black") +
+  labs(x = "Win Percentage", y = "Candy", title = "Candy Ranking Based on Win Percentage") +
+  theme_minimal()
+```
+
+#### Q16. This is quite ugly, use the `reorder()` function to get the bars sorted by `winpercent`.
+
+```{r}
+ggplot(candy) +
+  aes(winpercent, reorder(rownames(candy), winpercent)) +
+  geom_col(fill = "skyblue", color = "black") +
+  labs(x = "Win Percentage", y = "Candy", title = "Candy Ranking Based on Win Percentage") +
+  theme_minimal()
+```
+
+### Time to add some useful color
+
+```{r}
+my_cols <- rep("black", nrow(candy))
+my_cols[as.logical(candy$chocolate)] <- "chocolate"
+my_cols[as.logical(candy$bar)] <- "brown"
+my_cols[as.logical(candy$fruity)] <- "pink"
+
+# Barplot with colors based on candy type
+ggplot(candy) +
+  aes(winpercent, reorder(rownames(candy), winpercent)) +
+  geom_col(fill = my_cols) +
+  labs(x = "Win Percentage", y = "Candy", title = "Candy Ranking Based on Win Percentage") +
+  theme_minimal()
+```
+
+#### Q17. What is the worst ranked chocolate candy?
+
+Sixlets
+
+#### Q18. What is the best ranked fruit candy?
+
+Starburst
+
+### 4. Taking a look at pricepercent
+
+```{r}
+library(ggrepel)
+
+# How about a plot of price vs win
+ggplot(candy) +
+  aes(winpercent, pricepercent, label=rownames(candy)) +
+  geom_point(col=my_cols) + 
+  geom_text_repel(col=my_cols, size=3.3, max.overlaps = 5)
+```
+
+#### Q19. Which candy type is the highest ranked in terms of `winpercent` for the least money - i.e. offers the most bang for your buck?
+
+```{r}
+min_price_index <- which.min(candy$pricepercent)
+least_money <- rownames(candy)[which.max(candy$winpercent[c(min_price_index)])]
+least_money
+```
+
+100 Grand offers the most bang for your buck!
+
+#### Q20. What are the top 5 most expensive candy types in the dataset and of these which is the least popular?
+
+```{r}
+ord <- order(candy$pricepercent, decreasing = TRUE)
+head(candy[ord, c(11,12)], n = 5)
+```
+
+The top 5 most expensive candy types are Nik L Nip, Nestle Smarties, Ring pop, Hershey's Krackel, and Hershey's Milk Chocolate. The least popular is Nik L Nip.
+
+### 5. Exploring the correlation structure
+
+```{r}
+library(corrplot)
+```
+
+```{r}
+cij <- cor(candy)
+corrplot(cij)
+```
+
+#### Q22. Examining this plot, what two variables are anti-correlated (i.e. have minus values)?
+
+`pricepercent` and `winpercent`
+
+#### Q23. Similarly, what two variables are most positively correlated?
+
+`sugarpercent` and `pricepercent`
+
+### 6. Principal Component Analysis
+
+```{r}
+pca <- prcomp(candy, scale = TRUE)
+summary(pca)
+```
+
+```{r}
+plot(pca$x[, 1], pca$x[, 2], xlab = "PC1", ylab = "PC2")
+```
+
+```{r}
+plot(pca$x[,1:2], col=my_cols, pch=16)
+```
+
+```{r}
+# Make a new data-frame with our PCA results and candy data
+my_data <- cbind(candy, pca$x[,1:3])
+```
+
+```{r}
+p <- ggplot(my_data) + 
+        aes(x=PC1, y=PC2, 
+            size=winpercent/100,  
+            text=rownames(my_data),
+            label=rownames(my_data)) +
+        geom_point(col=my_cols)
+
+p
+```
+
+```{r}
+library(ggrepel)
+
+p + geom_text_repel(size=3.3, col=my_cols, max.overlaps = 7)  + 
+  theme(legend.position = "none") +
+  labs(title="Halloween Candy PCA Space",
+       subtitle="Colored by type: chocolate bar (dark brown), chocolate other (light brown), fruity (red), other (black)",
+       caption="Data from 538")
+```
+
+```{r}
+library(plotly)
+```
+
+```{r}
+ggplotly(p)
+```
+
+```{r}
+par(mar=c(8,4,2,2))
+barplot(pca$rotation[,1], las=2, ylab="PC1 Contribution")
+```
+
+#### Q24. What original variables are picked up strongly by PC1 in the positive direction? Do these make sense to you?
+
+`fruity`, `hard`, and `pluribus` are picked up strongly by PC1 in the positive direction. Yes, it makes sense to me that the fruity or hard candies coming in a bag or multiple fruity or hard candies in a box contribute positively to PC1. Since PC1 represents variation among the variables, it makes sense since some people like fruity candy and some don't, and some people like hard candy while others don't, and so on and so forth.

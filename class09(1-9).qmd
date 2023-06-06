@@ -1,0 +1,114 @@
+---
+title: "class09(1-9)"
+author: "Izabelle Querubin"
+format: html
+---
+
+## 1. Introduction to the RCSB Protein Data Bank (PDB)
+
+```{r}
+pdb_data <- read.csv("MolecType.csv", header = TRUE, stringsAsFactors = FALSE, row.names = 1)
+pdb_data$X.ray <- gsub(",", "", pdb_data$X.ray)
+pdb_data$EM <- gsub(",", "", pdb_data$EM)
+pdb_data$NMR <- gsub(",", "", pdb_data$NMR)
+pdb_data$Total <- gsub(",", "", pdb_data$Total)
+head(pdb_data)
+```
+
+**Q1:** What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy?
+
+```{r}
+pdb_data$X.ray <- as.integer(pdb_data$X.ray)
+pdb_data$EM <- as.integer(pdb_data$EM)
+pdb_data$NMR <- as.integer(pdb_data$NMR)
+pdb_data$Total <- as.integer(pdb_data$Total)
+head(pdb_data)
+```
+
+```{r}
+percent_xray <- sum(pdb_data$X.ray, pdb_data$EM, na.rm = TRUE) / sum(pdb_data$Total) * 100
+percent_xray
+```
+
+93% of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+**Q2:** What proportion of structures in the PDB are protein?
+
+```{r}
+sum(pdb_data$Total[1], pdb_data$Total[2], pdb_data$Total[3]) / sum(pdb_data$Total)
+```
+
+The proportion of structures in the PDB are protein is 0.98.
+
+**Q3:** Type HIV in the PDB website search box on the home page and determine how many HIV-1 protease structures are in the current PDB?
+
+There are 2,067 HIV-1 protease structures in the current PDB.
+
+## 2. Visualizing the HIV-1 protease structure
+
+**Q4:** Water molecules normally have 3 atoms. Why do we see just one atom per water molecule in this structure?
+
+In this structure, we see only one atom per water molecule due to the PDB format. As a way to conserve space and reduce the size of PDB files, water molecules are only represented by one atom.
+
+**Q5:** There is a critical "conserved" water molecule in the binding site. Can you identify this water molecule? What residue number does this water molecule have?
+
+HOH 308
+
+**Q6:** Generate and save a figure clearly showing the two distinct chains of HIV-protease along with the ligand. You might also consider showing the catalytic residues ASP 25 in each chain and the critical water (we recommend *"Ball & Stick"* for these side-chains). Add this figure to your Quarto document.
+
+![](images/1HSG.PDB-02.jpeg)
+
+## 3. Introduction to Bio3D in R
+
+```{r}
+library(bio3d)
+
+pdb <- read.pdb("1HSG")
+```
+
+```{r}
+pdb
+```
+
+**Q7:** How many amino acids residues are there in this pdb object?
+
+198
+
+**Q8:** Name one of the two non-protein residues.
+
+HOH
+
+**Q9.** How many protein chains are in this structure?
+
+2
+
+```{r}
+attributes(pdb)
+```
+
+```{r}
+head(pdb$atom)
+```
+
+### Predicting functional motions of a single structure
+
+```{r}
+adk <- read.pdb("6s36")
+```
+
+```{r}
+adk
+```
+
+```{r}
+# Perform flexibility prediction
+m <- nma(adk)
+```
+
+```{r}
+plot(m)
+```
+
+```{r}
+mktrj(m, file = "adk_m7.pdb")
+```

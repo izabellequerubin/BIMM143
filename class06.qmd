@@ -1,0 +1,77 @@
+---
+title: "class06"
+author: "Izabelle Querubin"
+format: pdf
+---
+
+#### Q1. Write a function grade() to determine an overall grade from a vector of student homework assignment scores dropping the lowest single score. If a student misses a homework (i.e. has an NA value) this can be used as a score to be potentially dropped. Your final function should be adequately explained with code comments and be able to work on an example class gradebook such as this one in CSV format: "https://tinyurl.com/gradeinput".
+
+```{r}
+# Importing the example class gradebook in CSV format
+gradebook <- read.csv("https://tinyurl.com/gradeinput", header = TRUE, sep = ",",  
+    quote = "\"", dec = ".", fill = TRUE, comment.char = "")
+gradebook
+```
+
+```{r}
+#Defining grade() function
+grade <- function(scores) {
+  # Removing "NA" scores
+  scores <- scores[!is.na(scores)]
+  
+  # Returning NA if all scores are "NA"
+  if(length(scores) == 0) {
+    return(NA)
+  }
+  
+  # Finding the lowest score
+  min_score <- min(scores)
+  
+  # Removing the lowest score
+  scores <- scores[scores != min_score]
+  
+  # Computing the average of the remaining scores
+  mean(scores)
+}
+
+# Applying the grade() function to every row of the example class gradebook
+gradebook$overall.grade <- apply(gradebook[,2:6], 1, grade)
+gradebook$overall.grade
+```
+
+#### Q2. Using your grade() function and the supplied gradebook, who is the top scoring student overall in the gradebook?
+
+```{r}
+# Finding the student with the highest overall grade
+top_student <- gradebook[which.max(gradebook$overall.grade), 1]
+top_student
+```
+
+The top scoring student overall is student-18.
+
+#### Q3. From your analysis of the gradebook, which homework was toughest on students (i.e. obtained the lowest scores overall)?
+
+```{r}
+# Computing the average score for each homework
+avg_hw <- apply(gradebook[,2:6], 2, mean)
+
+# Identifying the homework with the lowest average score
+toughest_hw <- names(avg_hw)[which.min(avg_hw)]
+toughest_hw
+```
+
+Homework 3 had the lowest overall score and therefore, it was the toughest homework for students.
+
+#### Q4. From your analysis of the gradebook, which homework was most predictive of overall score (i.e. highest correlation with average grade score)?
+
+```{r}
+# Computing the correlation between each homework and the overall grades
+hw_corr <- sapply(gradebook[,2:6], function(x) cor(x, gradebook$overall.grade, use =    
+  "everything"))
+
+# Identifying the homework with the highest correlation
+predictive_hw <- names(hw_corr)[which.max(hw_corr)]
+predictive_hw
+```
+
+Homework 1 was the most predictive of the overall score.

@@ -1,0 +1,314 @@
+---
+title: "Class 12"
+author: "Izabelle Querubin"
+format: pdf
+---
+
+## 1. Bioconductor and DESeq2 setup
+
+```{r}
+library(BiocManager)
+library(DESeq2)
+```
+
+# 2. Import countData and colData
+
+```{r}
+counts <- read.csv("airway_scaledcounts.csv", row.names=1)
+metadata <- read.csv("airway_metadata.csv")
+```
+
+```{r}
+nrow(counts)
+```
+
+```{r}
+View(metadata)
+```
+
+### **Q1.** How many genes are in this dataset?
+
+38694 genes
+
+### **Q2.** How many \'control\' cell lines do we have?
+
+4 'control' cell lines
+
+# 3. Toy differential gene expression
+
+```{r}
+control <- metadata[metadata[,"dex"]=="control",]
+control.counts <- counts[ ,control$id]
+control.mean <- rowSums( control.counts )/4 
+head(control.mean)
+```
+
+```{r}
+library(dplyr)
+control <- metadata %>% filter(dex=="control")
+control.counts <- counts %>% select(control$id) 
+control.mean <- rowSums(control.counts)/4
+head(control.mean)
+```
+
+### Q3. How would you make the above code in either approach more robust?
+
+```{r}
+# Subset metadata based on "dex" condition
+control <- metadata[metadata$dex == "control", ]
+
+# Validate if "id" column exists in control
+if (!"id" %in% colnames(control)) stop("Control metadata does not contain 'id' column.")
+
+# Subset counts based on control$id
+control.counts <- counts[, control$id]
+
+# Calculate control mean
+control.mean <- rowSums(control.counts) / 4
+head(control.mean)
+```
+
+This establishes a "validation check" to ensure that the "id" column exists in control.
+
+### Q4. Follow the same procedure for the `treated` samples (i.e. calculate the mean per gene across drug treated samples and assign to a labeled vector called `treated.mean`)
+
+```{r}
+# Subset metadata based on "dex" condition
+treated <- metadata[metadata[,"dex"] == "treated",]
+
+# Validate if "id" column exists in treated
+if (!"id" %in% colnames(treated)) stop("Treated metadata does not contain 'id' column.")
+
+# Calculate treated mean
+treated.mean <- rowSums(counts[, treated$id]) / 4 
+names(treated.mean) <- counts$ensgene
+head(treated.mean)
+```
+
+```{r}
+meancounts <- data.frame(Control = control.mean, Treated = treated.mean)
+colSums(meancounts)
+```
+
+### Q5(a). Create a scatter plot showing the mean of the treated samples against the mean of the control samples. 
+
+```{r}
+# Create a scatter plot using base R
+plot(control.mean, treated.mean, 
+     xlab = "Mean of Control Samples", 
+     ylab = "Mean of Treated Samples",
+     main = "Mean of Treated Samples vs. Mean of Control Samples")
+```
+
+### **Q5 (b).**You could also use the **ggplot2** package to make this figure producing the plot below. What **geom\_?()** function would you use for this plot?
+
+```{r}
+library(ggplot2)
+
+# Create the scatter plot using ggplot2
+ggplot(meancounts, aes(x = Control, y = Treated)) +
+  geom_point() +
+  labs(x = "Mean of Control Samples", y = "Mean of Treated Samples") +
+  ggtitle("Mean of Treated Samples vs. Mean of Control Samples")
+```
+
+geom_point()
+
+### **Q6.** Try plotting both axes on a log scale. What is the argument to **plot()** that allows you to do this?
+
+```{r}
+plot(control.mean, treated.mean,
+     xlab = "Mean of Control Samples",
+     ylab = "Mean of Treated Samples",
+     main = "Mean of Treated Samples vs. Mean of Control Samples",
+     log = "xy")
+```
+
+log = "xy"
+
+```{r}
+meancounts$log2fc <- log2(meancounts[,"Treated"]/meancounts[,"Control"])
+head(meancounts)
+```
+
+```{r}
+zero.vals <- which(meancounts[,1:2]==0, arr.ind=TRUE)
+
+to.rm <- unique(zero.vals[,1])
+mycounts <- meancounts[-to.rm,]
+head(mycounts)
+```
+
+### Q7. What is the purpose of the `arr.ind` argument in the **which()** function call above? Why would we then take the first column of the output and need to call the **unique()** function?
+
+The **`arr.ind = TRUE`** argument tells **`which()`** to return the results as indices in array/matrix form, allowing us to extract the row indices of the elements with zero values.
+
+The first column of the output is extracted because it contains the row indices of elements with zero values. **`unique()`** is used to obtain only the unique row indices since there might be cases where multiple elements have a value of zero in the same row.
+
+```{r}
+up.ind <- mycounts$log2fc > 2
+down.ind <- mycounts$log2fc < (-2)
+```
+
+### Q8. Using the `up.ind` vector above can you determine how many up regulated genes we have at the greater than 2 fc level?
+
+```{r}
+sum(up.ind)
+```
+
+250 up regulated genes.
+
+### Q9. Using the `down.ind` vector above can you determine how many down regulated genes we have at the greater than 2 fc level?
+
+```{r}
+sum(down.ind)
+```
+
+367 down regulated genes.
+
+### Q10. Do you trust these results? Why or why not?
+
+The log2 fold change threshold of greater than 2 or less than -2 is a common cutoff used in differential expression analysis. Because of this, I think we are on the right path but more statistical analysis (specifically significance) is needed to ensure that these results are not misleading.
+
+# 4. DESeq2 analysis
+
+```{r}
+library(DESeq2)
+citation("DESeq2")
+```
+
+```{r}
+dds <- DESeqDataSetFromMatrix(countData=counts, 
+                              colData=metadata, 
+                              design=~dex)
+dds
+```
+
+```{r}
+# Run the DESeq pipeline on the dds object, and reassign the whole thing back to dds
+dds <- DESeq(dds)
+
+# Get results
+res <- results(dds)
+res
+```
+
+```{r}
+res.df <- as.data.frame(res)
+View(res)
+```
+
+```{r}
+summary(res)
+```
+
+```{r}
+res05 <- results(dds, alpha=0.05)
+summary(res05)
+```
+
+# 5. Adding annotation data
+
+```{r}
+library("AnnotationDbi")
+library("org.Hs.eg.db")
+```
+
+```{r}
+columns(org.Hs.eg.db)
+```
+
+```{r}
+res$symbol <- mapIds(org.Hs.eg.db,
+                     keys=row.names(res),      # Our genenames
+                     keytype="ENSEMBL",        # The format of our genenames
+                     column="SYMBOL",          # The new format we want to add
+                     multiVals="first")
+```
+
+```{r}
+head(res)
+```
+
+### Q11. Run the **mapIds()** function two more times to add the Entrez ID and UniProt accession and GENENAME as new columns called `res$entrez`, `res$uniprot` and `res$genename`.
+
+```{r}
+# Add Entrez ID column
+res$entrez <- mapIds(org.Hs.eg.db,
+                     keys = row.names(res),
+                     keytype = "ENSEMBL",
+                     column = "ENTREZID",
+                     multiVals = "first")
+
+# Add UniProt accession column
+res$uniprot <- mapIds(org.Hs.eg.db,
+                      keys = row.names(res),
+                      keytype = "ENSEMBL",
+                      column = "UNIPROT",
+                      multiVals = "first")
+
+# Add gene name column
+res$genename <- mapIds(org.Hs.eg.db,
+                       keys = row.names(res),
+                       keytype = "ENSEMBL",
+                       column = "GENENAME",
+                       multiVals = "first")
+```
+
+```{r}
+ord <- order( res$padj )
+#View(res[ord,])
+head(res[ord,])
+```
+
+```{r}
+write.csv(res[ord,], "deseq_results.csv")
+```
+
+# 6. Data Visualization
+
+```{r}
+plot( res$log2FoldChange, -log(res$padj), 
+      xlab="Log2(FoldChange)",
+      ylab="-Log(P-value)")
+```
+
+```{r}
+plot( res$log2FoldChange,  -log(res$padj), 
+ ylab="-Log(P-value)", xlab="Log2(FoldChange)")
+
+# Add some cut-off lines
+abline(v=c(-2,2), col="darkgray", lty=2)
+abline(h=-log(0.05), col="darkgray", lty=2)
+
+```
+
+```{r}
+# Setup our custom point color vector 
+mycols <- rep("gray", nrow(res))
+mycols[ abs(res$log2FoldChange) > 2 ]  <- "red" 
+
+inds <- (res$padj < 0.01) & (abs(res$log2FoldChange) > 2 )
+mycols[ inds ] <- "blue"
+
+# Volcano plot with custom colors 
+plot( res$log2FoldChange,  -log(res$padj), 
+ col=mycols, ylab="-Log(P-value)", xlab="Log2(FoldChange)" )
+
+# Cut-off lines
+abline(v=c(-2,2), col="gray", lty=2)
+abline(h=-log(0.1), col="gray", lty=2)
+```
+
+```{r}
+library(EnhancedVolcano)
+```
+
+```{r}
+x <- as.data.frame(res)
+
+EnhancedVolcano(x,
+    lab = x$symbol,
+    x = 'log2FoldChange',
+    y = 'pvalue')
+```
