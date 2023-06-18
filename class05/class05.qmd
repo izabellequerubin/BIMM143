@@ -1,7 +1,7 @@
 ---
 title: "class05"
 author: "Izabelle Querubin"
-format: pdf
+format: gfm
 ---
 
 # Data visualization with ggplot2
