@@ -12,5 +12,6 @@ This page contains my classwork from BIMM 143: Bioinformatics Lab at UC San Dieg
 * Class 11: [Genome informatics and high throughput sequencing](https://github.com/izabellequerubin/BIMM143/edit/main/README.md#:~:text=Querubin_%20class11_BIMM143.pdf-,class11,-.Rmd)
 * Class 12: [Transciptomics and the analysis of RNA-Seq data](https://github.com/izabellequerubin/BIMM143/edit/main/README.md#:~:text=class12.-,qmd,-deseq_results.csv)
 * Class 13: [RNA-Seq mini-project](https://github.com/izabellequerubin/BIMM143/edit/main/README.md#:~:text=class13.-,qmd,-deseq_results.csv)
-* Class 17: [Vaccination rate mini-project]
-* Class 19: [Pertussis resurgence mini-project]
+* Class 17: [Vaccination rate mini-project](https://github.com/izabellequerubin/BIMM143/edit/main/README.md#:~:text=class17-,class17,-.Rproj)
+* Class 19: [Pertussis resurgence mini-project](https://github.com/izabellequerubin/BIMM143/edit/main/README.md#:~:text=class19.pdf-,class19,-.qmd)
+* [Find-A-Gene Project](https://github.com/izabellequerubin/BIMM143/edit/main/README.md#:~:text=findagene.pdf-,findagene,-.qmd)
