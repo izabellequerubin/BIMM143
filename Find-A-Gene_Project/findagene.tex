@@ -1,0 +1,661 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Find-a-gene Project},
+  pdfauthor={Izabelle Querubin, iquerubi@ucsd.edu, A16015750},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Find-a-gene Project}
+\author{Izabelle Querubin, iquerubi@ucsd.edu, A16015750}
+\date{}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, interior hidden, breakable, borderline west={3pt}{0pt}{shadecolor}, sharp corners, enhanced]}{\end{tcolorbox}}\fi
+
+\hypertarget{q1.-tell-me-the-name-of-a-protein-you-are-interested-in.-include-the-species-and-the-accession-number.-this-can-be-a-human-protein-or-a-protein-from-any-other-species-as-long-as-its-function-is-known.}{%
+\subsection{\texorpdfstring{Q1. \textbf{Tell me the name of a protein
+you are interested in. Include the species and the accession number.
+This can be a human protein or a protein from any other species as long
+as its function is
+known.}}{Q1. Tell me the name of a protein you are interested in. Include the species and the accession number. This can be a human protein or a protein from any other species as long as its function is known.}}\label{q1.-tell-me-the-name-of-a-protein-you-are-interested-in.-include-the-species-and-the-accession-number.-this-can-be-a-human-protein-or-a-protein-from-any-other-species-as-long-as-its-function-is-known.}}
+
+\textbf{If you do not have a favorite protein, select human RBP4 or
+KIF11. Do not use beta globin as this is in the worked example report
+that I provide you with online.}
+
+Protein: CLOCK
+
+Accession number: NP\_004489.1
+
+Species: Homo sapiens
+
+Function known: Encodes a protein that plays a central role in the
+regulation of circadian rhythms---a transcription factor of the basic
+helix-loop-helix (bHLH) family, containing DNA binding histone
+acetyltransferase activity. May be associated with behavioral changes in
+certain populations, and with obesity and metabolic syndrome.
+
+\hypertarget{q2.-perform-a-blast-search-against-a-dna-database-such-as-a-database-consisting-of-genomic-dna-or-ests.-the-blast-server-can-be-at-ncbi-or-elsewhere.-include-details-of-the-blast-method-used-database-searched-and-any-limits-applied-e.g.-organism.}{%
+\subsection{\texorpdfstring{Q2. \textbf{Perform a BLAST search against a
+DNA database, such as a database consisting of genomic DNA or ESTs. The
+BLAST server can be at NCBI or elsewhere. Include details of the BLAST
+method used, database searched and any limits applied
+(e.g.~Organism).}}{Q2. Perform a BLAST search against a DNA database, such as a database consisting of genomic DNA or ESTs. The BLAST server can be at NCBI or elsewhere. Include details of the BLAST method used, database searched and any limits applied (e.g.~Organism).}}\label{q2.-perform-a-blast-search-against-a-dna-database-such-as-a-database-consisting-of-genomic-dna-or-ests.-the-blast-server-can-be-at-ncbi-or-elsewhere.-include-details-of-the-blast-method-used-database-searched-and-any-limits-applied-e.g.-organism.}}
+
+Method: TBLASTN (2.71.1) search against nematode ESTs
+
+Database: Expressed sequence tags (est)
+
+Organism: Nematodes (Taxid: 6231)
+
+\hypertarget{on-the-blast-results-clearly-indicate-a-match-that-represents-a-protein-sequence-encoded-from-some-dna-sequence-that-is-homologous-to-your-query-protein.}{%
+\subsection{\texorpdfstring{\textbf{On the BLAST results, clearly
+indicate a match that represents a protein sequence, encoded from some
+DNA sequence, that is homologous to your query
+protein.}}{On the BLAST results, clearly indicate a match that represents a protein sequence, encoded from some DNA sequence, that is homologous to your query protein.}}\label{on-the-blast-results-clearly-indicate-a-match-that-represents-a-protein-sequence-encoded-from-some-dna-sequence-that-is-homologous-to-your-query-protein.}}
+
+Chosen match: Accession JZ762439, a 789 base pair clone from Meloidogyne
+incognita (southern root-knot nematode). See below for alignment
+details.
+
+\includegraphics{https://lh4.googleusercontent.com/5RQJtVXoNZ00bao4POQIIhf-iw8ZTfSWt8yMVirPAEGuJS8cBRZilpwVqdpSaIZpxfv4bJvcnrNQssjuZXU-C4TsryJTEuNSMAv8RQQz5d3mcY3uSDtK7FdT8WW1ZkLGVOtK4eEsSnzobCFw54x3KiY.pdf}
+
+\includegraphics{https://lh5.googleusercontent.com/fysR8RzDr8xBuWwYuGFcVPRXcnwGPNgsOfck-yPItDo6UcDHXuHoTHeX_0fsTJhET49GY-OKQFkF0O2aJXisJb8AJmKMZ6cdrADHScAiNvniFv_76m6LA9g7C-tLtJkYBZD6A6Aq473kXxCQ8G1EpaA.pdf}
+
+\hypertarget{q3.-gather-information-about-this-novel-protein.}{%
+\subsection{\texorpdfstring{Q3. \textbf{Gather information about this
+``novel''
+protein.}}{Q3. Gather information about this ``novel'' protein.}}\label{q3.-gather-information-about-this-novel-protein.}}
+
+\begin{verbatim}
+>JZ762439.1 NEFSJ21016_D10_.g_078.ab1 Meloidogyne incognita J2 Meloidogyne incognita cDNA, mRNA sequence
+ACGCGCCACACACCGGATATGCGCTTCAGCTACGTCAGCGACGGCTGGAACATTCCGTGCCGCGACGGGC
+ACCGAAAACTCATCGGCACCTCCTTCTACGACCTCGTCTACCCGTCGGACCTGCAGTCAGTGGTCACCTG
+CATGAAGGAGCTGCAGTCCAAGGGCCATTGCCGCACTCCGTTCTACCGCTGGCTCGGCGCGAATGCCTCG
+GTAACGTGGGTCCAGACCGAAGCGACCACCATCAACCACCGCAGCAAGGGCACGAAGGGTTACTATGTGC
+TGTGCACCCATTACGTGCTGGGCAACCAGAACGAGATGGAGTCATGGGAGACGCCGTGCTCAGCGTTCAA
+CTCTGCCGCAAGGCCAGTGATGACCCGCGTCAAGGCGGAGATTGACGACATCTCAGACTACTGCTTCGGA
+CACCAGCAGCCAGGTGTGGAGTGCGTCGATGTTGAGCCACTTGCCGAGTTCTTCCCTCAGTGCTTCGATC
+AGGTGGACCAGCGCTCACGGCAGAAGCCCTATCACCCACGCCATGCCAACATGGGCCTGGACGGCGACAG
+CGAATTCGACGCCGTCCTGCAGTGGCTCTTCCGCGAGGACGATGACGCTCCGCCACAGTGCGACTCTTGC
+CTTACGGTCCCTGCCGGTCGCAGTCGGTGTCAGTCCAATCCCGACGGCATGAAGCGGTCCGCAGCCTACA
+TGGCACAGCAGCAGCCAGCCCCGGCATCGGCCTACGGCTCGGCGTTGGACGTCAATCAGTTGTCGGCGGG
+TGATATCGCGCAGCCGATG
+\end{verbatim}
+
+\hypertarget{chosen-sequence}{%
+\subsubsection{Chosen sequence:}\label{chosen-sequence}}
+
+Name: Hypoxia inducible factor 1 alpha subunit
+
+Species: Meloidogyne incognita;
+
+Eukaryota; Metazoa; Ecdysozoa; Nematoda; Chromadorea; Rhabditida;
+Tylenchina; Tylenchomorpha; Tylenchoidea; Meloidogynidae;
+Meloidogyninae; Meloidogyne; Meloidogyne incognita group.
+
+\hypertarget{q4.-prove-that-this-gene-and-its-corresponding-protein-are-novel.-for-the-purposes-of-this-project-novel-is-defined-as-follows.-take-the-protein-sequence-your-answer-to-q3-and-use-it-as-a-query-in-a-blastp-search-of-the-nr-database-at-ncbi.}{%
+\subsection{\texorpdfstring{Q4. \textbf{Prove that this gene, and its
+corresponding protein, are novel. For the purposes of this project,
+``novel'' is defined as follows. Take the protein sequence (your answer
+to {[}Q3{]}), and use it as a query in a blastp search of the nr
+database at
+NCBI.}}{Q4. Prove that this gene, and its corresponding protein, are novel. For the purposes of this project, ``novel'' is defined as follows. Take the protein sequence (your answer to {[}Q3{]}), and use it as a query in a blastp search of the nr database at NCBI.}}\label{q4.-prove-that-this-gene-and-its-corresponding-protein-are-novel.-for-the-purposes-of-this-project-novel-is-defined-as-follows.-take-the-protein-sequence-your-answer-to-q3-and-use-it-as-a-query-in-a-blastp-search-of-the-nr-database-at-ncbi.}}
+
+\includegraphics{https://lh4.googleusercontent.com/BJoeemyfQpQwsW16u808c8_NzI6gHaw_9VQPhao1XZK-Jiofd7mB4M2ebkXxf5sFlU-FA8fmKJe4cAtr5iZpfRJ6ZvSZOtSiLhWDx9jlauqPLAFIpU7e_euRaDBZzIJFgy8FEIbFxuTXhCDSnzjTPBw.pdf}
+
+\includegraphics{https://lh3.googleusercontent.com/sQkBoT1igCXilU0RsDKKMMRoFAd4jupZ7I6i1zDG34aV9KPdedozCJMdda5OKcnF5-MIXLa9nfokuZCGQ1xlD05fMoX8t-q7G-xYr_wri1r9IZNXiwr85tSoOrP3sPu2fE2X4gocsylbM005WFAgZSU.pdf}
+
+\includegraphics{https://lh4.googleusercontent.com/Vy_7ZzSJ1jec-IHrmIebfDx8cYRWZ9D3rKPDMtv1HHtAxoEu42M5yVh_X67aLYYAO5PCa4S9IvyRdZZO4tYvnhoff2AF99tQURWHUJ9Nx1qlgwghG4PTBRNnb08wiHy5I_PEQyR4-TdNAKO4n8kjIuE.pdf}
+
+\hypertarget{q5.-generate-a-multiple-sequence-alignment-with-your-novel-protein-your-original-query-protein-and-a-group-of-other-members-of-this-family-from-different-species.}{%
+\subsection{\texorpdfstring{Q5. \textbf{Generate a multiple sequence
+alignment with your novel protein, your original query protein, and a
+group of other members of this family from different
+species.}}{Q5. Generate a multiple sequence alignment with your novel protein, your original query protein, and a group of other members of this family from different species.}}\label{q5.-generate-a-multiple-sequence-alignment-with-your-novel-protein-your-original-query-protein-and-a-group-of-other-members-of-this-family-from-different-species.}}
+
+\hypertarget{relabeled-sequences}{%
+\subsubsection{Relabeled sequences:}\label{relabeled-sequences}}
+
+\begin{verbatim}
+>Human | NP_004889.1 circadian locomoter output cycles protein kaput [Homo sapiens]\nMLFTVSCSKMSSIVDRDDSSIFDGLVEEDDKDKAKRVSRNKSEKKRRDQFNVLIKELGSMLPGNARKMDK\nSTVLQKSIDFLRKHKEITAQSDASEIRQDWKPTFLSNEEFTQLMLEALDGFFLAIMTDGSIIYVSESVTS\nLLEHLPSDLVDQSIFNFIPEGEHSEVYKILSTHLLESDSLTPEYLKSKNQLEFCCHMLRGTIDPKEPSTY\nEYVKFIGNFKSLNSVSSSAHNGFEGTIQRTHRPSYEDRVCFVATVRLATPQFIKEMCTVEEPNEEFTSRH\nSLEWKFLFLDHRAPPIIGYLPFEVLGTSGYDYYHVDDLENLAKCHEHLMQYGKGKSCYYRFLTKGQQWIW\nLQTHYYITYHQWNSRPEFIVCTHTVVSYAEVRAERRRELGIEESLPETAADKSQDSGSDNRINTVSLKEA\nLERFDHSPTPSASSRSSRKSSHTAVSDPSSTPTKIPTDTSTPPRQHLPAHEKMVQRRSSFSSQSINSQSV\nGSSLTQPVMSQATNLPIPQGMSQFQFSAQLGAMQHLKDQLEQRTRMIEANIHRQQEELRKIQEQLQMVHG\nQGLQMFLQQSNPGLNFGSVQLSSGNSSNIQQLAPINMQGQVVPTNQIQSGMNTGHIGTTQHMIQQQTLQS\nTSTQSQQNVLSGHSQQTSLPSQTQSTLTAPLYNTMVISQPAAGSMVQIPSSMPQNSTQSAAVTTFTQDRQ\nIRFSQGQQLVTKLVTAPVACGAVMVPSTMLMGQVVTAYPTFATQQQQSQTLSVTQQQQQQSSQEQQLTSV\nQQPSQAQLTQPPQQFLQTSRLLHGNPSTQLILSAAFPLQQSTFPQSHHQQHQSQQQQQLSRHRTDSLPDP\nSKVQPQ\n\n>Southern_Root_Nematode | JZ762439.1 NEFSJ21016_D10_.g_078.ab1 Meloidogyne incognita J2 Meloidogyne incognita cDNA, mRNA sequence,\nKLIGTSFYDLVYPSDLQSVVTCMKELQSKGHCRTPFYRWLGANASVTWVQTEATTINHRSKGTKGYYVLCTHYVLG\n\n>Wood_White_Butterfly | XP_050671994.1 hypoxia-inducible factor 1-alpha-like isoform X5 [Leptidea sinapis]\nMCFNVDGAPCQYTNVVDLEDFMNNEKRKEKSRVAARCRRTKEMQIFAEMTAALPAKKEMVEQLDKSSVMRLAISYLRVRD\nIVSLLPADTEPPKLKSPKGLEEIQSELSYMKALDGFVLVLSQQGDIIYCSDNITEHLGVSQMEIMGQSVFEFSHPCDHEE\nIREALRSNGAGRRDLLLRLKCTLTSKGRNVHIKSASYKVIHMTGHMLTPDKESNNNDEEGKKDLKKPTNGALIAVGRPIP\nHPSNIEVPLDTKTFLTKHSLDMKFTYTDEGLLNALGFESDELVGCSLYDYHHAADSASLVQQFKSLFSKGQCETGQYRFL\nGKSGGYAWIQTQATVITDKQQKPSFVVCVNYVISGIECKDEVFAAHQVQHADLKPAVAALPATAVPICDNPAPANGAIVG\nVILPEEERPIPVTELIFAPREKEMNKGFLMFSQNKGITSEWMLNRDSLVLKDEPEDLTHLAPTAGDAHILLENSPFDMFD\nDFILNDNYCSLLGDDLANGSPVDSLIGDSLLSSPERQENESTGEQSSLLTELSLDAFDSARSDTDIDDGNSPFIPTTDEL\nPVLEPAVMWGALPDSVRQARPQPSEIQSSSPALQRLLVAPPTGPPPQDIITNIYSEQGLIPSRNISSWDTGVKRIMKQEE\nEPTAKRIKRSPTPTPTQTSTSSSVLMNLLVSGCDVDAGYICMVQCRPRHKAKA\n\n>African_Social_Spider | XP_035210551.1 hypoxia-inducible factor 1-alpha-like isoform X1 [Stegodyphus dumicola]\nMCGGKVAIPPIVKEKRRNSEKRKEKSRDAARCRRSKESEIFSDLSGQLPLAPGVASALDKASIMRLTVGYLKVREMMKIL\nIPCGRTVTGSSNDSIYAAVLNGFLLVLSEEGDIIYLSENVEEFIGISQVDMMGHSVYDFSHPCDHEDIKQVLAPKISEKI\nQIKTDNFGRETISFFVRMKSTVKSKGRTMNLKSAAYQVIHYIGHRFDKPRGVEDDDKCPTFYLVFIGKTIPHPAQIDVPL\nDKDIFVSRHSPDMKFTHIDERISEFLGFTNSELIGQSAYSFHHPLDAQTVFSAFKTLFSKGQCETGYYRFLSKYGGYVWL\nVTQATVIYENGTKPECVVCLNYVLSKVENGHEIVSGQQEQSIKEKEEAEDENICVAEEEGSPSEPPVLLSSTRVIFAPKE\nSVMSKDFLNFPDADLQDLDLEPPLEKIPCSVVNSATLNQNVLFQESLKDTKLNLEFDFFQDDPCTLENGISEDPFISYRD\nDSLSSPSYCGTPESSLNLHTSNSTSPDRFNTTPGTPDSGSLSDIPSLDPIDEFSNLDLKFTMPPSASDDSECCDENLDFR\nAPYISMNMDDDFPLISPSSSVMWGPQEPAPKKLPQERLPEIEPQRISPPKQKPVTENLNSSLAALLQSDVKKTPQSKQEK\nNAVARRESNSHKRWSGSSADNNKSSSLKQRPFNPSKGYGNGGHIIMLDSIPVKKQNSKSNASQRRTAQPSASDRRSNSPP\nFGSHTATVKVNDRLIKVQVSVSELPTSPIEHKQPFPSPPDPPPKRTSPSRLGPTESPKRLKVDNGLICSGPQGFASDSVL\nLNLLISGEDASRGYLCSGNSRYSDSKFESAMLSLSSDDSSSKQTNDSSSNCTELLASESELLDFLKISQYDAEVNAPIQS\nSHLLQGDDLLSALDHQPLLRNVPALV\n\n>Domestic_Silk_Moth | XP_037876182.1 hypoxia-inducible factor 1-alpha isoform X4 [Bombyx mori]\nMSTKPANQKRRNNEKRKEKSRVAARCRRTKEMQIFSELTAALPAKKEEVEQLDKASVMRLAISYLRVRDVVSMLPDVNSD\nQSKMQNPEGFEELASELSYMRALDGFVLVLSQQGDIVYCSDNIAEHLGVSQMEIMGQSVFEFSHPCDHDEIREALRTNGG\nARRDLLLRLKCTLTSKGRNVHLKSASYKVIHITGHMLASTEDNERNNNETKADEEKKGKAGCLVAVGRPIPHPSNIEIPL\nDSKTFLSKHSLDMKFTYVDESLLNTLGFGSEELVGRSLYDYHHAADSASMIQQFKSLFSKGQCETGQYRFLAKSGGYSWV\nQTQATVITDKQQKPISVVCVNYIISGIECKDEVFAAHQVQHADLKPKLPAVASPGVSFRAPVEPLANGAIVAIVPPEEER\nPIPVTELIFAPRKKEMNKGFLMFSQDEGLTSEWLFNQSLVLKDEPEDLTHLAPTAGDACIPLENSPFDMFDEFILSDNYC\nSLLGDDLANGSPVDPLAPDPSLLSSPESQENDSSCEQSSLLTELSLDAFDNTRSDEIDDSNSPFIPISDELPVLEPAVMW\nGALPDSVSQARPQPSETHTSPAPALQRLLTGPPPQDLITSIYSDQGLMPSRSISTWDTGVKRVMKEEEEPSAKRVKRSPS\nPVAPKPKSQSSSVLMNLLDIPQQSTPHKQPMKANYQILPNTQMLGLQNVLHRNMQVPIINITQAVPNKHVMRASTPINQM\nRTNMTTGPMSPLSLNIGSPMYSLPSSPNSYSSPAMSPAQRERVMSPYSTPQSLSPVGKFHQMYSPGQRMVSPTGVIQGSD\nPYLTTKMQPSPGFPMQVNDILLDTNVQLPTSDFWADPEFLQGTSDLLTAFDDVKLG\n\n>Ringlet_Butterfly | XP_034834054.1 hypoxia-inducible factor 1-alpha isoform X4 [Maniola hyperantus]\nMIKSEMASKPTNQKRRNNEKRKEKSRVAARCRRTKEMQIFVELTAALPAKKEEVEQLDKASVMRLAISYLRVRDVVSMLP\nEDKEAPKLQSPKGLEEVQSELSYMNALDGFVLVLSQQGDIVYCSENIADHLGVSQMEIMGQSVFEFSHPCDHDEIRESLR\nAGNDGRRDLLLRLKCTLTSKGRNVHLKSASYKVIHVTGHMITPTEEKTKDQDLSTDSDEEKKEVKSYTNTGALVAVGRPI\nPHPSNIETPLNSMTFLTKHSLDMKFTYTDEGLTNSLGFESEELVGRSLYEYHHAADSASLAQQFKSLFSKGQCETGQYRF\nLAKTGGYSWVQTQATVITDKQQKPISVICVNYVISGIECKDEVFAAHQVHHADLKPVVAPAPLIRVSTEPPANGAIVGIV\nAPEEERPIPVTEQIFVPRKKEMNKGFLMFSQNEGLTSESHSNCKSLVLKDEPEDLTHLAPTAGDACISLENNSPFDMFDD\nFMLNDNYCSLLGDDLANGSPVDSLIADSLLSSPEPQETESSCEQSSLLTELSLDAFDNRSDNDIDDGNSPFIPTTDELPL\nLEPAVMWGVLPDSVSQAKPQPSEVQTSAPALQRLLAAPPTGPPPQDIITNIYSDPGLIPSRSVSSWDTGVKRVMKQEEES\nTAKRVKRSPSPAAPTARTPSSSVLMNLLDIHPQAKQQIRQQLRSNYQMSLNTPRTSPQSPVNKNLPVPVINIIRSGPNEP\nLMRANTTAPNPPMIRTSPMSPLTLNVGSPMYSLPSSPNTPNYSPAMSPAQKDRVLSPYSTPQSLSPAGSYMYSPNNKLLS\nPSGVMRGYDPYLNNKMQTSPGFPLQSDMLLDTNMPLASTDFWPDSDMLQGTSDLLTAFDDVKLV\n\n>Corn_Snake | XP_034294080.1 hypoxia-inducible factor 3-alpha isoform X3 [Pantherophis guttatus]\nMSWSKYQRSTTEIRKEKSRDAARCRRSKETEVFYQLAHTLPFARGVSAHLDKASIMRLTISYLRMHKLLNSGEWRDQVKA\nEEQVDSYYLKALDGFLMVLTEEGDMIYLSENVNKHLGLSQLELIGHSVFDFIHPCDQEELQDVLSPRQGFSKKAEVKTER\nNFSLRMKSTLTTRGRTVNLKSATWKVLHCSGHMRSYAPSKPATGKEGEGGFAEPPLRCLVLICEAIPHPANIETPLDSGT\nFLSRHTMDMKFTYCDDRIVEMAGYTSESLLGCSLYEYIHALDSDSVSKSINTLLSKGQAVTGQYRFLARNGGYIWIQTEA\nTVISSSKNSQPESIVCIHFVLSQVEENGLVLSLEQTDRQGEHRRLPPPCLEGLDSDSALEEMDPNGGDTIINLSFELRGP\nKILAFLRPANISEEELQLDPKRFCSPDLQKLLGPIFDPPGTQNSAGGTGRAKPPAPVPKTAPVVKKMSGNHNLSDLPEEL\nIFDMENVQKLFASNKEEQSMETALQDYEGLDLEMLAPYISMDDDFQLSSTDHPPWLTEKRGDPGAGPRPASPPPRPRSRS\nFHGVSPRPPEPAPLPRWGSDSSLSQGRPIETPLANSPCGEGQMVEMVASVKIQSVQDGTGLNGQRSPLGGRKRTREISLD\nEERDLFLETIPPKRAHNHEAEGFLMPSLSLGFLLSVEECLDARSERGCGGTVALGKKLLALEEPMGLLGDMLPFVVDGPA\nLSQLALYDGEEEVSGRGGEHFQLGEELLVELDQAT\n\n>Brown_Spotted_Pit_Viper | XP_029140890.1 hypoxia-inducible factor 3-alpha [Protobothrops mucrosquamatus]\nMPRCVQNMSPEKLGSSSATIGHPNTGEKGSTTEIRKEKSRDAARCRRSKETEVFYQLAHTLPFARGVSAHLDKASIMRLT\nISYLRMHKLLNSGEWRDQVKAEEQVDSYYLKALDGFLMVLTEEGDMIYLSENVNKHLGLSQLELIGHSVFDFIHPCDQEE\nLQDVLSPRQGFSKKGEVKTERNFSLRMKSTLTTRGRTVNLKSATWKVLHCSGHMRCYAPSKPAAGKEGEGGFTEPPLRCL\nVLICEAILHPANIETPLDSGTFLSRHTMDMKFTYCDDRIVEMAGYTSESLLGCSLYEYIHALDSDSVSKSINTLLSKGQA\nVTGQYRFLARNGGYIWIQTEATVISSSKNSQPESIVCMHFVLSQVEENGLVLSLEQTDRQGEHRRLPPPCLEGLDSESAL\nDEMDPNGGDTIINLSFELRGPKILAFLRPANISEEELQLDPKRFCSPDLQKLLGPIFDPPGTQNSAGGAVRAKLPAPIAK\nLAPVVKKASGNHDSAWLPFPLGTLCSPLQDYEGLDLEMLAPYISMDDDFQLSSTDHPPWLAEKRRDPAGAGARPVSPPPR\nPRSRSFHGVSPRPPEAPTLPRWGSDSSLSQGRPVETPLANSPCGEGQMVEMVASVKIQSVQDGAGLNGHRSPLGGKKRAR\nEISLDEERDLFLETSPPKRAHNHEAEGFLMPSLSLGFLLSVEECLDARSERGCGGTVALGKKLLALEEPMGLLGDMLPFV\nVDGPALSQLALYDGEEEVSGRGGEHFQLGEELLVELDQAT
+\end{verbatim}
+
+\hypertarget{alignment-using-ebis-muscle}{%
+\subsubsection{Alignment using EBI's
+MUSCLE:}\label{alignment-using-ebis-muscle}}
+
+\begin{verbatim}
+CLUSTAL multiple sequence alignment by MUSCLE (3.8)\n\n\nHuman                        MLFTVSCSKMSSIVDRDDSSIFDGLVEEDDKDKAKRVSRNKSEKK-RRDQFNVLIKELGS\nCorn_Snake                   ----------------------MSWSKYQRSTTEIRKEKSRDAARCRRSKETEVFYQLAH\nBrown_Spotted_Pit_Viper      -MPRCVQNMSPEKLGSSSATIGHPNTGEKGSTTEIRKEKSRDAARCRRSKETEVFYQLAH\nDomestic_Silk_Moth           --------------------MSTKPANQKRRNNEKRKEKSRVAARCRRTKEMQIFSELTA\nWood_White_Butterfly         ---------MCFNVDGAPCQYTNVVDLEDFMNNEKRKEKSRVAARCRRTKEMQIFAEMTA\nRinglet_Butterfly            ---------------MIKSEMASKPTNQKRRNNEKRKEKSRVAARCRRTKEMQIFVELTA\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        --------------MCGGKVAIPPIVKEKRRNSEKRKEKSRDAARCRRSKESEIFSDLSG\n                                                                                         \n\nHuman                        MLP---GNARKMDKSTVLQKSIDFLRKHKEITAQSD-ASEIRQDWKPTFLSNEEFTQLML\nCorn_Snake                   TLPFARGVSAHLDKASIMRLTISYLRMHKLLN---------SGEWRDQVKAEEQVDSYYL\nBrown_Spotted_Pit_Viper      TLPFARGVSAHLDKASIMRLTISYLRMHKLLN---------SGEWRDQVKAEEQVDSYYL\nDomestic_Silk_Moth           ALPAKKEEVEQLDKASVMRLAISYLRVRDVVSMLPDVNSDQSKMQNPEGFEELASELSYM\nWood_White_Butterfly         ALPAKKEMVEQLDKSSVMRLAISYLRVRDIVSLLPA-DTEPPKLKSPKGLEEIQSELSYM\nRinglet_Butterfly            ALPAKKEEVEQLDKASVMRLAISYLRVRDVVSMLPE-DKEAPKLQSPKGLEEVQSELSYM\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        QLPLAPGVASALDKASIMRLTVGYLKVREMMKILIP---------CGRTVTGSSNDSIYA\n                                                                                         \n\nHuman                        EALDGFFLAIMTDGSIIYVSESVTSLLEHLPSDLVDQSIFNFIPEGEHSEVYKILSTHLL\nCorn_Snake                   KALDGFLMVLTEEGDMIYLSENVNKHLGLSQLELIGHSVFDFIHPCDQEELQDVLSPR--\nBrown_Spotted_Pit_Viper      KALDGFLMVLTEEGDMIYLSENVNKHLGLSQLELIGHSVFDFIHPCDQEELQDVLSPR--\nDomestic_Silk_Moth           RALDGFVLVLSQQGDIVYCSDNIAEHLGVSQMEIMGQSVFEFSHPCDHDEIREALRTN--\nWood_White_Butterfly         KALDGFVLVLSQQGDIIYCSDNITEHLGVSQMEIMGQSVFEFSHPCDHEEIREALRSN--\nRinglet_Butterfly            NALDGFVLVLSQQGDIVYCSENIADHLGVSQMEIMGQSVFEFSHPCDHDEIRESLRAG--\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        AVLNGFLLVLSEEGDIIYLSENVEEFIGISQVDMMGHSVYDFSHPCDHEDIKQVLAPKIS\n                                                                                         \n\nHuman                        ESDSLTPEY-LKSKNQLEF---CCHMLRGTIDPKEPSTYEYVKFIGNFKSLNSVSS-SAH\nCorn_Snake                   --QGFSKKAEVKTERNFSLRMKSTLTTRGRTVNLKSATWKVLHCSGHMRSYAPSKPATGK\nBrown_Spotted_Pit_Viper      --QGFSKKGEVKTERNFSLRMKSTLTTRGRTVNLKSATWKVLHCSGHMRCYAPSKPAAGK\nDomestic_Silk_Moth           ----------GGARRDLLLRLKCTLTSKGRNVHLKSASYKVIHITGHMLASTEDNE-RNN\nWood_White_Butterfly         ----------GAGRRDLLLRLKCTLTSKGRNVHIKSASYKVIHMTGHMLTPDKESNNNDE\nRinglet_Butterfly            ----------NDGRRDLLLRLKCTLTSKGRNVHLKSASYKVIHVTGHMITPTEEKTKDQD\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        EKIQIKTDNFGRETISFFVRMKSTVKSKGRTMNLKSAAYQVIHYIGH-----------RF\n                                                                                         \n\nHuman                        NGFEGTIQRTHRPSYEDRVCFVATVRLATPQFIKEMCTVEEP--NEEFTSRHSLEWKFLF\nCorn_Snake                   EGEGGFAEPPLR-------CLVLICEA-----IPHPANIETPLDSGTFLSRHTMDMKFTY\nBrown_Spotted_Pit_Viper      EGEGGFTEPPLR-------CLVLICEA-----ILHPANIETPLDSGTFLSRHTMDMKFTY\nDomestic_Silk_Moth           NETKADEEKKGKAG-----CLVAVGRP-----IPHPSNIEIPLDSKTFLSKHSLDMKFTY\nWood_White_Butterfly         EGKKDLKKPTNG-------ALIAVGRP-----IPHPSNIEVPLDTKTFLTKHSLDMKFTY\nRinglet_Butterfly            LSTDSDEEKKEVKSYTNTGALVAVGRP-----IPHPSNIETPLNSMTFLTKHSLDMKFTY\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        DKPRGVEDDDKCPTF----YLVFIGKT-----IPHPAQIDVPLDKDIFVSRHSPDMKFTH\n                                                                                         \n\nHuman                        LDHRAPPIIGYLPFEVLGTSGYDYYHVDDLENLAKCHEHLMQYGKGKSCYYRFLTKGQQW\nCorn_Snake                   CDDRIVEMAGYTSESLLGCSLYEYIHALDSDSVSKSINTLLSKGQAVTGQYRFLARNGGY\nBrown_Spotted_Pit_Viper      CDDRIVEMAGYTSESLLGCSLYEYIHALDSDSVSKSINTLLSKGQAVTGQYRFLARNGGY\nDomestic_Silk_Moth           VDESLLNTLGFGSEELVGRSLYDYHHAADSASMIQQFKSLFSKGQCETGQYRFLAKSGGY\nWood_White_Butterfly         TDEGLLNALGFESDELVGCSLYDYHHAADSASLVQQFKSLFSKGQCETGQYRFLGKSGGY\nRinglet_Butterfly            TDEGLTNSLGFESEELVGRSLYEYHHAADSASLAQQFKSLFSKGQCETGQYRFLAKTGGY\nSouthern_Root_Nematode       --------------KLIGTSFYDLVYPSDLQSVVTCMKELQSKGHCRTPFYRWLGANASV\nAfrican_Social_Spider        IDERISEFLGFTNSELIGQSAYSFHHPLDAQTVFSAFKTLFSKGQCETGYYRFLSKYGGY\n                                           .::* * *.  :  *  .:    : * . *:  :  **:*      \n\nHuman                        IWLQTHYYITYH-QWNSRPEFIVCTHTVVSYAEVR-----AERRRELGIEE---SLPETA\nCorn_Snake                   IWIQTEATVISS-SKNSQPESIVCIHFVLSQVEENGLVLSLEQTDRQGEHR---RLPPPC\nBrown_Spotted_Pit_Viper      IWIQTEATVISS-SKNSQPESIVCMHFVLSQVEENGLVLSLEQTDRQGEHR---RLPPPC\nDomestic_Silk_Moth           SWVQTQATVIT--DKQQKPISVVCVNYIISGIECKDEVFAAHQVQHADLKP---KLPAVA\nWood_White_Butterfly         AWIQTQATVIT--DKQQKPSFVVCVNYVISGIECKDEVFAAHQVQHADLKPAVAALPATA\nRinglet_Butterfly            SWVQTQATVIT--DKQQKPISVICVNYVISGIECKDEVFAAHQVHHADLKP---VVAPAP\nSouthern_Root_Nematode       TWVQTEATTINHRSKGTKGYYVLCTHYVLG------------------------------\nAfrican_Social_Spider        VWLVTQATVIY--ENGTKPECVVCLNYVLSKVENGHEIVSGQQEQSIKEKE---EAEDEN\n                              *: *        ..  .   ::* : ::.                              \n\nHuman                        ADKSQDSGSDNRINTVSLKEALERFDHSPTPSASSRSSRKSSHTAVSDPSSTPTKIPTDT\nCorn_Snake                   LEGLDSDSAL--------------EEMDPNGGDTIINLSFELRGPKILAFLRPANISEEE\nBrown_Spotted_Pit_Viper      LEGLDSESAL--------------DEMDPNGGDTIINLSFELRGPKILAFLRPANISEEE\nDomestic_Silk_Moth           SPGVSFRAPVEPLANGAIVAIVPPEEERPIPVTELIFAPRKKEMNKGFLMFSQDEGLTSE\nWood_White_Butterfly         VPICDNPAPA----NGAIVGVILPEEERPIPVTELIFAPREKEMNKGFLMFSQNKGITSE\nRinglet_Butterfly            LIRVSTEPPA----NGAIVGIVAPEEERPIPVTEQIFVPRKKEMNKGFLMFSQNEGLTSE\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        ICVAEEEGS-------------PSEPPVLLSSTRVIFAPKESVMSKDFLNFPDADLQDLD\n                                                                                         \n\nHuman                        STPPRQHLP---AHEKMVQRRSSFSSQ----------------------SINSQSVGSSL\nCorn_Snake                   LQLDPKRFC---SPDLQKLLGPIFDPP----------------------GTQNSAGGTGR\nBrown_Spotted_Pit_Viper      LQLDPKRFC---SPDLQKLLGPIFDPP----------------------GTQNSAGGAVR\nDomestic_Silk_Moth           WLFN-QSLVLKDEPEDLTHLAPTAGDACIPLE-NSPFDMFDE-------FILSDNYCSLL\nWood_White_Butterfly         WMLNRDSLVLKDEPEDLTHLAPTAGDAHILLE-NSPFDMFDD-------FILNDNYCSLL\nRinglet_Butterfly            SHSNCKSLVLKDEPEDLTHLAPTAGDACISLENNSPFDMFDD-------FMLNDNYCSLL\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        LEPPLEKIPCSVVNSATLNQNVLFQESLKDTKLNLEFDFFQDDPCTLENGISEDPFISYR\n                                                                                         \n\nHuman                        TQPVMSQATNLPIPQGMSQFQFSAQLGAMQHLKDQLEQRTRMIEANIHRQQEELRKIQEQ\nCorn_Snake                   AKPPAPVPKTAPVVKKMSGNHNLSDLPEELIFDMENVQKLFASN----KEEQSMETALQD\nBrown_Spotted_Pit_Viper      AKLPAPIAKLAPVVKKASGNHDSAWLP---------------------FPLGTLCSPLQD\nDomestic_Silk_Moth           GDDLAN----GSPVDPLAPDPSLLSSPESQENDSSCEQSSLLTE----LSLDAFDNTRSD\nWood_White_Butterfly         GDDLAN----GSPVDSLIGD-SLLSSPERQENESTGEQSSLLTE----LSLDAFDSARSD\nRinglet_Butterfly            GDDLAN----GSPVDSLIAD-SLLSSPEPQETESSCEQSSLLTE----LSLDAFDN-RSD\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        DDSLSSPSYCGTPESSLNLHTSNSTSPDRFNTTPGTPDSGSLSDIPSLDPIDEFSNLDLK\n                                                                                         \n\nHuman                        LQM------------VHGQGLQMFLQ----QSNPGLNFGSVQLSSGNSSNIQQLAPINMQ\nCorn_Snake                   YEG------------LDLEMLAPYIS--MDDDFQLSSTDHPPWLTEKRGDP-GAGPRPAS\nBrown_Spotted_Pit_Viper      YEG------------LDLEMLAPYIS--MDDDFQLSSTDHPPWLAEKRRDPAGAGARPVS\nDomestic_Silk_Moth           -EI------------DDSN--SPFIP--ISDELPVLEP--AVMWGALPDSVSQARPQPSE\nWood_White_Butterfly         TDI------------DDGN--SPFIP--TTDELPVLEP--AVMWGALPDSVRQARPQPSE\nRinglet_Butterfly            NDI------------DDGN--SPFIP--TTDELPLLEP--AVMWGVLPDSVSQAKPQPSE\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        FTMPPSASDDSECCDENLDFRAPYISMNMDDDFPLISPSSSVMWGPQ-------EPAPKK\n                                                                                         \n\nHuman                        GQVVPTNQIQSGMNTGHIGTTQ-----------------HMIQQQTLQSTSTQSQQNVLS\nCorn_Snake                   PPPRPRSRSFHGVSPRPPEPAP------------------LPRWG--------SDSSLSQ\nBrown_Spotted_Pit_Viper      PPPRPRSRSFHGVSPRPPEAP------------------TLPRWG--------SDSSLSQ\nDomestic_Silk_Moth           THTSPAPALQRLL----TGPPPQDLITSIYSDQGLMPSRSISTWDTGVKRVMKEEEEPSA\nWood_White_Butterfly         IQSS-SPALQRLLVAPPTGPPPQDIITNIYSEQGLIPSRNISSWDTGVKRIMKQEEEPTA\nRinglet_Butterfly            VQTS-APALQRLLAAPPTGPPPQDIITNIYSDPGLIPSRSVSSWDTGVKRVMKQEEESTA\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        LPQERLPEIEPQRISPPKQKPVTENLNSSLA--------ALLQSDVKKTPQSKQEKNAVA\n                                                                                         \n\nHuman                        GHSQQTSLP-SQTQSTLTAPLYNTMVISQPAAGSMV--------QIPSSMPQNSTQSAAV\nCorn_Snake                   GRPIETPLANSPCGEGQMVEMVASVKIQSVQDGTGLNGQ---------RSPLGGRKRTRE\nBrown_Spotted_Pit_Viper      GRPVETPLANSPCGEGQMVEMVASVKIQSVQDGAGLNGH---------RSPLGGKKRARE\nDomestic_Silk_Moth           KRVKRSPSPVAPKPKSQSSSVLMNLLDI-PQQSTPHKQPMKANYQILPNTQMLGLQNVLH\nWood_White_Butterfly         KRIKRSPTP-TPTQTSTSSSVLMNLLVSGCDVDAGY------------------------\nRinglet_Butterfly            KRVKRSPSPAAPTARTPSSSVLMNLLDIHPQAKQQIRQQLRSNYQMSLNTPRTSPQSPVN\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        RRESNSHKRWSGSSADNNKSSSLKQRPFNPSKGYGNGGHIIMLDSIPVKKQNSKSNASQR\n                                                                                         \n\nHuman                        TTFTQDRQIRFSQGQQLVTKLVTAPVA--------CGAVMVPSTMLMGQVVTAYPTFATQ\nCorn_Snake                   ISLDEERDLFLETIPPKRAHNHE------------AEGFLMP-SLSLGFLLSVEECLDAR\nBrown_Spotted_Pit_Viper      ISLDEERDLFLETSPPKRAHNHE------------AEGFLMP-SLSLGFLLSVEECLDAR\nDomestic_Silk_Moth           RNMQVPIINITQAVPNKHVMRASTPINQ--MRTNMTTGPMSPLSLNIGSPMYSLPSSPNS\nWood_White_Butterfly         --------------------------------------------------ICMVQCRPRH\nRinglet_Butterfly            KNLPVPVINIIRSGPNEPLMRANTTAPN--PPMI-RTSPMSPLTLNVGSPMYSLPSSPNT\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        RTAQPSASDRRSNSPPFGSHTATVKVNDRLIKVQVSVSELPTSPIEHKQPFPSPPDPPPK\n                                                                                         \n\nHuman                        QQQSQTLSVTQQQQQQSSQEQQLTSVQQPSQAQLTQPPQQFLQTSRLLHGNP---STQLI\nCorn_Snake                   SERGCGGTVALGKKLLALEEPMGLLGDMLPFVVDGPALSQLALYDG--------------\nBrown_Spotted_Pit_Viper      SERGCGGTVALGKKLLALEEPMGLLGDMLPFVVDGPALSQLALYDG--------------\nDomestic_Silk_Moth           -YSSPAMSPAQRERVMSPYSTPQSLSPVGKFHQMYSPGQRMVSPTGVIQGSDPYLTTKMQ\nWood_White_Butterfly         KAKA--------------------------------------------------------\nRinglet_Butterfly            PNYSPAMSPAQKDRVLSPYSTPQSLSPAGSY--MYSPNNKLLSPSGVMRGYDPYLNNKMQ\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        RTSPSRLGPTESPKRLKVDNGLICSGPQG-FASDSVLLNLLISGEDASRGYLCSGNSRYS\n                                                                                         \n\nHuman                        LSAAFPLQQSTFPQSHHQQHQSQQ-------------------------------QQQLS\nCorn_Snake                   --------------------EEEVSGR----------------------------GGEHF\nBrown_Spotted_Pit_Viper      --------------------EEEVSGR----------------------------GGEHF\nDomestic_Silk_Moth           PSPGFPMQVNDILLDTNVQLPTSDFWA----------------------------DPEFL\nWood_White_Butterfly         ------------------------------------------------------------\nRinglet_Butterfly            TSPGFPLQ-SDMLLDTNMPLASTDFWP----------------------------DSDML\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        DSKFESAMLSLSSDDSSSKQTNDSSSNCTELLASESELLDFLKISQYDAEVNAPIQSSHL\n                                                                                         \n\nHuman                        RHRTDSLPDPSKVQPQ-------\nCorn_Snake                   QLGEELLVELDQAT---------\nBrown_Spotted_Pit_Viper      QLGEELLVELDQAT---------\nDomestic_Silk_Moth           QGTSDLLTAFDDVKLG-------\nWood_White_Butterfly         -----------------------\nRinglet_Butterfly            QGTSDLLTAFDDVKLV-------\nSouthern_Root_Nematode       -----------------------\nAfrican_Social_Spider        LQGDDLLSALDHQPLLRNVPALV\n                                                    
+\end{verbatim}
+
+\hypertarget{q6.-create-a-phylogenetic-tree-using-either-a-parsimony-or-distance-based-approach.-bootstrapping-and-tree-rooting-are-optional.-use-simple-phylogeny-online-from-the-ebi-or-any-respected-phylogeny-program-such-as-mega-paup-or-phylip.-paste-an-image-of-your-cladogram-or-tree-output-in-your-report.}{%
+\subsection{\texorpdfstring{Q6. \textbf{Create a phylogenetic tree,
+using either a parsimony or distance-based approach. Bootstrapping and
+tree rooting are optional. Use ``simple phylogeny'' online from the EBI
+or any respected phylogeny program (such as MEGA, PAUP, or Phylip).
+Paste an image of your Cladogram or tree output in your
+report.}}{Q6. Create a phylogenetic tree, using either a parsimony or distance-based approach. Bootstrapping and tree rooting are optional. Use ``simple phylogeny'' online from the EBI or any respected phylogeny program (such as MEGA, PAUP, or Phylip). Paste an image of your Cladogram or tree output in your report.}}\label{q6.-create-a-phylogenetic-tree-using-either-a-parsimony-or-distance-based-approach.-bootstrapping-and-tree-rooting-are-optional.-use-simple-phylogeny-online-from-the-ebi-or-any-respected-phylogeny-program-such-as-mega-paup-or-phylip.-paste-an-image-of-your-cladogram-or-tree-output-in-your-report.}}
+
+\hypertarget{phylogenetic-tree-using-ebis-simple-phylogeny-feature.}{%
+\subsubsection{Phylogenetic tree using EBI's ``Simple Phylogeny''
+feature.}\label{phylogenetic-tree-using-ebis-simple-phylogeny-feature.}}
+
+\includegraphics{images/Screen Shot 2023-06-18 at 6.03.37 AM.png}
+
+\hypertarget{q7.-generate-a-sequence-identity-based-heatmap-of-your-aligned-sequences-using-r.}{%
+\subsection{\texorpdfstring{Q7. \textbf{Generate a sequence identity
+based heatmap of your aligned sequences using
+R.}}{Q7. Generate a sequence identity based heatmap of your aligned sequences using R.}}\label{q7.-generate-a-sequence-identity-based-heatmap-of-your-aligned-sequences-using-r.}}
+
+Read MUSCLE alignment file into Seaview and saved file as FASTA.
+
+\begin{figure}
+
+{\centering \includegraphics{findagene_files/figure-pdf/unnamed-chunk-4-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{q8.-using-rbio3d-or-an-online-blast-server-if-you-prefer-search-the-main-protein-structure-database-for-the-most-similar-atomic-resolution-structures-to-your-aligned-sequences.-list-the-top-3-unique-hits-i.e.-not-hits-representing-different-chains-from-the-same-structure-along-with-their-evalue-and-sequence-identity-to-your-query.-please-also-add-annotation-details-of-these-structures.}{%
+\subsection{\texorpdfstring{Q8. \textbf{Using R/Bio3D (or an online
+blast server if you prefer), search the main protein structure database
+for the most similar atomic resolution structures to your aligned
+sequences. List the top 3 unique hits (i.e.~not hits representing
+different chains from the same structure) along with their Evalue and
+sequence identity to your query. Please also add annotation details of
+these
+structures.}}{Q8. Using R/Bio3D (or an online blast server if you prefer), search the main protein structure database for the most similar atomic resolution structures to your aligned sequences. List the top 3 unique hits (i.e.~not hits representing different chains from the same structure) along with their Evalue and sequence identity to your query. Please also add annotation details of these structures.}}\label{q8.-using-rbio3d-or-an-online-blast-server-if-you-prefer-search-the-main-protein-structure-database-for-the-most-similar-atomic-resolution-structures-to-your-aligned-sequences.-list-the-top-3-unique-hits-i.e.-not-hits-representing-different-chains-from-the-same-structure-along-with-their-evalue-and-sequence-identity-to-your-query.-please-also-add-annotation-details-of-these-structures.}}
+
+First, choose the sequence with the highest identity within the
+alignment.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sums }\OtherTok{\textless{}{-}} \FunctionTok{rowSums}\NormalTok{(identity)}
+
+\FunctionTok{which.max}\NormalTok{(sums)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Wood_White_Butterfly 
+                   5 
+\end{verbatim}
+
+In the main protein structure database, use the Wood\_White\_Butterfly
+sequence to search for the most similar atomic resolution structure to
+the aligned sequences.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wood\_white }\OtherTok{\textless{}{-}} \FunctionTok{read.fasta}\NormalTok{(}\StringTok{"woodwhite.fasta"}\NormalTok{)}
+
+\NormalTok{hits }\OtherTok{\textless{}{-}} \FunctionTok{blast.pdb}\NormalTok{(wood\_white, }\AttributeTok{database =} \StringTok{"pdb"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Searching ... please wait (updates every 5 seconds) RID = 8Y8TZ97R01N 
+ 
+ Reporting 37 hits
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(hits, }\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+$hit.tbl
+        queryid subjectids identity alignmentlength mismatches gapopens q.start
+1  Query_165351     4ZPR_B   49.162             358        156        6      22
+2  Query_165351     4ZP4_B   43.454             359        182        5      23
+3  Query_165351     6E3T_B   43.454             359        182        5      23
+4  Query_165351     6E3S_B   43.175             359        183        5      23
+5  Query_165351     7V7L_B   41.257             366        195        7      19
+6  Query_165351     5SY7_B   31.863             408        207        9      27
+7  Query_165351     5SY5_B   30.769             403        201        9      22
+8  Query_165351     4H6J_A   55.556             108         47        1     250
+9  Query_165351     5TBM_A   48.182             110         56        1     249
+11 Query_165351     4WN5_A   50.476             105         51        1     254
+12 Query_165351     1P97_A   47.273             110         57        1     249
+14 Query_165351     3F1N_A   48.182             110         56        1     249
+16 Query_165351     6X21_A   48.182             110         56        1     249
+18 Query_165351     2A24_A   47.664             107         55        1     252
+20 Query_165351     5KIZ_A   45.455             110         59        1     249
+21 Query_165351     4F3L_B   22.995             374        235        9      27
+22 Query_165351     8OSJ_N   23.592             373        233       10      27
+23 Query_165351     4F3L_A   25.556             360        242       10      23
+24 Query_165351     8OSJ_M   25.556             360        242       10      23
+25 Query_165351     8H77_E   23.662             355        218        8      48
+26 Query_165351     7Y04_E   23.380             355        219        8      48
+27 Query_165351     7ZUB_D   25.145             346        199        9      48
+28 Query_165351     7XI4_B   26.453             344        209       13      27
+29 Query_165351     7XI3_B   26.453             344        209       13      27
+30 Query_165351     5Y7Y_A   29.787             141         90        3      29
+31 Query_165351     5V0L_B   30.400             125         80        2      48
+32 Query_165351     5NJ8_A   32.283             127         76        3      48
+33 Query_165351     2KDK_A   29.060             117         81        2     241
+34 Query_165351     7XHV_B   27.528             178        118        5      31
+35 Query_165351     5F5Y_A   32.500              80         53        1     254
+36 Query_165351     5F68_A   32.500              80         53        1     254
+37 Query_165351     6QPJ_A   33.898              59         39        0     110
+19 Query_165351     2A24_A   40.541              37         22        0     128
+10 Query_165351     5TBM_A   40.541              37         22        0     128
+15 Query_165351     3F1N_A   33.333              57         36        1     110
+17 Query_165351     6X21_A   33.333              57         36        1     110
+13 Query_165351     1P97_A   40.541              37         22        0     128
+   q.end s.start s.end    evalue bitscore positives mlog.evalue pdb.id    acc
+1    367       1   344 1.28e-116    354.0     68.44  266.853011 4ZPR_B 4ZPR_B
+2    369      10   359 5.05e-102    317.0     67.69  233.244291 4ZP4_B 4ZP4_B
+3    369      10   359 7.05e-102    317.0     67.69  232.910652 6E3T_B 6E3T_B
+4    369      10   359  1.15e-99    311.0     67.41  227.816162 6E3S_B 6E3S_B
+5    374       3   358  4.37e-91    289.0     63.93  208.060480 7V7L_B 7V7L_B
+6    372       6   404  4.14e-56    197.0     48.77  127.524069 5SY7_B 5SY7_B
+7    368       1   381  1.51e-49    179.0     46.90  112.414560 5SY5_B 5SY5_B
+8    356       3   110  1.62e-37    137.0     75.00   84.713222 4H6J_A 4H6J_A
+9    357       6   115  2.00e-32    122.0     73.64   72.989576 5TBM_A 5TBM_A
+11   357       9   113  1.19e-31    120.0     71.43   71.206185 4WN5_A 4WN5_A
+12   357       3   112  1.99e-31    119.0     73.64   70.692003 1P97_A 1P97_A
+14   357       6   115  3.66e-31    119.0     73.64   70.082675 3F1N_A 3F1N_A
+16   357       6   115  4.03e-31    119.0     73.64   69.986372 6X21_A 6X21_A
+18   357       1   107  4.25e-31    118.0     72.90   69.933219 2A24_A 2A24_A
+20   357       4   113  4.54e-27    107.0     70.00   60.656870 5KIZ_A 5KIZ_A
+21   353      14   381  2.92e-26    112.0     44.65   58.795629 4F3L_B 4F3L_B
+22   353      18   384  5.94e-26    112.0     45.58   58.085503 8OSJ_N 8OSJ_N
+23   361       7   361  6.37e-24    105.0     46.11   53.410443 4F3L_A 4F3L_A
+24   361      10   364  7.31e-24    105.0     46.11   53.272799 8OSJ_M 8OSJ_M
+25   362      60   401  9.11e-23    103.0     42.25   50.750084 8H77_E 8H77_E
+26   362      60   401  1.14e-22    102.0     41.97   50.525844 7Y04_E 7Y04_E
+27   347      53   384  2.57e-22    102.0     42.49   49.712966 7ZUB_D 7ZUB_D
+28   358      10   321  4.83e-14     75.5     41.57   30.661345 7XI4_B 7XI4_B
+29   358      10   321  5.02e-14     75.5     41.57   30.622761 7XI3_B 7XI3_B
+30   161      10   149  6.78e-13     70.9     53.19   28.019629 5Y7Y_A 5Y7Y_A
+31   165      22   146  1.22e-12     69.7     54.40   27.432170 5V0L_B 5V0L_B
+32   165      30   155  2.10e-11     66.2     54.33   24.586499 5NJ8_A 5NJ8_A
+33   355       2   118  1.57e-10     60.5     52.99   22.574775 2KDK_A 2KDK_A
+34   206       5   173  3.47e-09     58.9     48.31   19.479111 7XHV_B 7XHV_B
+35   332       2    81  3.14e-07     50.4     55.00   14.973873 5F5Y_A 5F5Y_A
+36   332       2    81  2.57e-06     47.8     55.00   12.871605 5F68_A 5F68_A
+37   168      11    69  2.00e-03     40.8     59.32    6.214608 6QPJ_A 6QPJ_A
+19   164      15    51  6.00e-03     38.5     62.16    5.115996 2A24_A 2A24_A
+10   164      23    59  7.00e-03     38.5     62.16    4.961845 5TBM_A 5TBM_A
+15   164       3    59  2.90e-02     36.6     50.88    3.540459 3F1N_A 3F1N_A
+17   164       3    59  3.30e-02     36.6     50.88    3.411248 6X21_A 6X21_A
+13   164      20    56  3.60e-02     36.2     62.16    3.324236 1P97_A 1P97_A
+
+$raw
+        queryid subjectids identity alignmentlength mismatches gapopens q.start
+1  Query_165351     4ZPR_B   49.162             358        156        6      22
+2  Query_165351     4ZP4_B   43.454             359        182        5      23
+3  Query_165351     6E3T_B   43.454             359        182        5      23
+4  Query_165351     6E3S_B   43.175             359        183        5      23
+5  Query_165351     7V7L_B   41.257             366        195        7      19
+6  Query_165351     5SY7_B   31.863             408        207        9      27
+7  Query_165351     5SY5_B   30.769             403        201        9      22
+8  Query_165351     4H6J_A   55.556             108         47        1     250
+9  Query_165351     5TBM_A   48.182             110         56        1     249
+10 Query_165351     5TBM_A   40.541              37         22        0     128
+11 Query_165351     4WN5_A   50.476             105         51        1     254
+12 Query_165351     1P97_A   47.273             110         57        1     249
+13 Query_165351     1P97_A   40.541              37         22        0     128
+14 Query_165351     3F1N_A   48.182             110         56        1     249
+15 Query_165351     3F1N_A   33.333              57         36        1     110
+16 Query_165351     6X21_A   48.182             110         56        1     249
+17 Query_165351     6X21_A   33.333              57         36        1     110
+18 Query_165351     2A24_A   47.664             107         55        1     252
+19 Query_165351     2A24_A   40.541              37         22        0     128
+20 Query_165351     5KIZ_A   45.455             110         59        1     249
+21 Query_165351     4F3L_B   22.995             374        235        9      27
+22 Query_165351     8OSJ_N   23.592             373        233       10      27
+23 Query_165351     4F3L_A   25.556             360        242       10      23
+24 Query_165351     8OSJ_M   25.556             360        242       10      23
+25 Query_165351     8H77_E   23.662             355        218        8      48
+26 Query_165351     7Y04_E   23.380             355        219        8      48
+27 Query_165351     7ZUB_D   25.145             346        199        9      48
+28 Query_165351     7XI4_B   26.453             344        209       13      27
+29 Query_165351     7XI3_B   26.453             344        209       13      27
+30 Query_165351     5Y7Y_A   29.787             141         90        3      29
+31 Query_165351     5V0L_B   30.400             125         80        2      48
+32 Query_165351     5NJ8_A   32.283             127         76        3      48
+33 Query_165351     2KDK_A   29.060             117         81        2     241
+34 Query_165351     7XHV_B   27.528             178        118        5      31
+35 Query_165351     5F5Y_A   32.500              80         53        1     254
+36 Query_165351     5F68_A   32.500              80         53        1     254
+37 Query_165351     6QPJ_A   33.898              59         39        0     110
+   q.end s.start s.end    evalue bitscore positives
+1    367       1   344 1.28e-116    354.0     68.44
+2    369      10   359 5.05e-102    317.0     67.69
+3    369      10   359 7.05e-102    317.0     67.69
+4    369      10   359  1.15e-99    311.0     67.41
+5    374       3   358  4.37e-91    289.0     63.93
+6    372       6   404  4.14e-56    197.0     48.77
+7    368       1   381  1.51e-49    179.0     46.90
+8    356       3   110  1.62e-37    137.0     75.00
+9    357       6   115  2.00e-32    122.0     73.64
+10   164      23    59  7.00e-03     38.5     62.16
+11   357       9   113  1.19e-31    120.0     71.43
+12   357       3   112  1.99e-31    119.0     73.64
+13   164      20    56  3.60e-02     36.2     62.16
+14   357       6   115  3.66e-31    119.0     73.64
+15   164       3    59  2.90e-02     36.6     50.88
+16   357       6   115  4.03e-31    119.0     73.64
+17   164       3    59  3.30e-02     36.6     50.88
+18   357       1   107  4.25e-31    118.0     72.90
+19   164      15    51  6.00e-03     38.5     62.16
+20   357       4   113  4.54e-27    107.0     70.00
+21   353      14   381  2.92e-26    112.0     44.65
+22   353      18   384  5.94e-26    112.0     45.58
+23   361       7   361  6.37e-24    105.0     46.11
+24   361      10   364  7.31e-24    105.0     46.11
+25   362      60   401  9.11e-23    103.0     42.25
+26   362      60   401  1.14e-22    102.0     41.97
+27   347      53   384  2.57e-22    102.0     42.49
+28   358      10   321  4.83e-14     75.5     41.57
+29   358      10   321  5.02e-14     75.5     41.57
+30   161      10   149  6.78e-13     70.9     53.19
+31   165      22   146  1.22e-12     69.7     54.40
+32   165      30   155  2.10e-11     66.2     54.33
+33   355       2   118  1.57e-10     60.5     52.99
+34   206       5   173  3.47e-09     58.9     48.31
+35   332       2    81  3.14e-07     50.4     55.00
+36   332       2    81  2.57e-06     47.8     55.00
+37   168      11    69  2.00e-03     40.8     59.32
+
+$url
+                                                                                                                                                                          8Y8TZ97R01N 
+"https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Get&FORMAT_OBJECT=Alignment&ALIGNMENT_VIEW=Tabular&RESULTS_FILE=on&FORMAT_TYPE=CSV&ALIGNMENTS=20000&DESCRIPTIONS=20000&RID=8Y8TZ97R01N" 
+\end{verbatim}
+
+The top 3 unique hits are 4ZPR\_B, 4ZP4\_B, and 6E3T\_B. Save these to a
+new dataframe and add annotations: structure ID, method used to solve
+the structure, resolution, and source organism.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{three }\OtherTok{\textless{}{-}}\NormalTok{ hits}\SpecialCharTok{$}\NormalTok{hit.tbl[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, ]}
+
+\NormalTok{anno }\OtherTok{\textless{}{-}} \FunctionTok{pdb.annotate}\NormalTok{(three}\SpecialCharTok{$}\NormalTok{pdb.id)}
+
+\NormalTok{three\_anno }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(three, anno, }\AttributeTok{by.x =} \StringTok{"pdb.id"}\NormalTok{, }\AttributeTok{by.y =} \StringTok{"row.names"}\NormalTok{)}
+
+\CommentTok{\# Only take relevant columns}
+
+\NormalTok{relevant\_colnames }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"pdb.id"}\NormalTok{, }\StringTok{"experimentalTechnique"}\NormalTok{, }\StringTok{"resolution"}\NormalTok{, }\StringTok{"source"}\NormalTok{, }\StringTok{"evalue"}\NormalTok{, }\StringTok{"identity"}\NormalTok{)}
+
+\NormalTok{scan }\OtherTok{\textless{}{-}} \FunctionTok{match}\NormalTok{(relevant\_colnames, }\FunctionTok{colnames}\NormalTok{(three\_anno))}
+
+\NormalTok{three\_anno\_relevant }\OtherTok{\textless{}{-}}\NormalTok{ three\_anno[, scan]}
+
+\CommentTok{\# Split PDB identifier on the underscore}
+
+\NormalTok{ids }\OtherTok{\textless{}{-}}\NormalTok{ three\_anno\_relevant}\SpecialCharTok{$}\NormalTok{pdb.id}
+
+\NormalTok{ids\_split }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(ids, }\StringTok{"\_"}\NormalTok{)}
+
+\CommentTok{\# [[ is synonymous to \textbackslash{}$. They both select an element from a list}
+
+\NormalTok{three\_anno\_relevant}\SpecialCharTok{$}\NormalTok{pdb.id }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(ids\_split, }\StringTok{"[["}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+
+\NormalTok{three\_anno\_relevant}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  pdb.id experimentalTechnique resolution       source    evalue identity
+1   4ZP4                 X-ray      2.355 Mus musculus 5.05e-102   43.454
+2   4ZPR                 X-ray      3.902 Mus musculus 1.28e-116   49.162
+3   6E3T                 X-ray      3.000 Mus musculus 7.05e-102   43.454
+\end{verbatim}
+
+I'm not sure why the \texttt{pdb.id} column came out as a list; however,
+individual cells can be viewed (example down below).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cry }\OtherTok{\textless{}{-}}\NormalTok{ three\_anno\_relevant[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\NormalTok{cry}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[1]]
+[1] "4ZPR"
+\end{verbatim}
+
+\hypertarget{q9.-generate-a-molecular-figure-of-one-of-your-identified-pdb-structures-using-vmd.-you-can-optionally-highlight-conserved-residues-that-are-likely-to-be-functional.-please-use-a-white-or-transparent-background-for-your-figure-i.e.-not-the-default-black.-based-on-sequence-similarity.-how-likely-is-this-structure-to-be-similar-to-your-novel-protein}{%
+\subsection{\texorpdfstring{Q9. \textbf{Generate a molecular figure of
+one of your identified PDB structures using VMD. You can optionally
+highlight conserved residues that are likely to be functional. Please
+use a white or transparent background for your figure (i.e.~not the
+default black). Based on sequence similarity. How likely is this
+structure to be similar to your "novel"
+protein?}}{Q9. Generate a molecular figure of one of your identified PDB structures using VMD. You can optionally highlight conserved residues that are likely to be functional. Please use a white or transparent background for your figure (i.e.~not the default black). Based on sequence similarity. How likely is this structure to be similar to your "novel" protein?}}\label{q9.-generate-a-molecular-figure-of-one-of-your-identified-pdb-structures-using-vmd.-you-can-optionally-highlight-conserved-residues-that-are-likely-to-be-functional.-please-use-a-white-or-transparent-background-for-your-figure-i.e.-not-the-default-black.-based-on-sequence-similarity.-how-likely-is-this-structure-to-be-similar-to-your-novel-protein}}
+
+Molecular figure of 4ZPR downloaded from MolStar.
+
+\includegraphics{images/4ZPR.png}
+
+The sequence similarity is 49.16\% for 4ZPR; therefore, this structure
+from Mus musculus is only about half likely to be similar to my
+``novel'' protein.
+
+\hypertarget{q10.-perform-a-target-search-of-chembel-with-your-novel-sequence.-are-there-any-target-associated-assays-and-ligand-efficiency-data-reported-that-may-be-useful-starting-points-for-exploring-potential-inhibition-of-your-novel-protein}{%
+\subsection{\texorpdfstring{Q10. \textbf{Perform a "Target" search of
+ChEMBEL with your novel sequence. Are there any Target Associated Assays
+and ligand efficiency data reported that may be useful starting points
+for exploring potential inhibition of your novel
+protein?}}{Q10. Perform a "Target" search of ChEMBEL with your novel sequence. Are there any Target Associated Assays and ligand efficiency data reported that may be useful starting points for exploring potential inhibition of your novel protein?}}\label{q10.-perform-a-target-search-of-chembel-with-your-novel-sequence.-are-there-any-target-associated-assays-and-ligand-efficiency-data-reported-that-may-be-useful-starting-points-for-exploring-potential-inhibition-of-your-novel-protein}}
+
+ChEMBL details 3 Binding Assays
+(\href{https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4234786}{CHEMBL4234786}
+and
+\href{https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4234788}{CHEMBL4234788})
+and 1 Inhibitory Assay
+(\href{https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4219635}{CHEMBL4219635})
+all in Homo Sapiens.
+
+Ligand efficiency data below:
+
+\includegraphics{images/newplot.png}
+
+https://www.ebi.ac.uk/chembl/target\_report\_card/CHEMBL4296117/
+
+Binding assay linked a description for affinity to N-terminal His6
+tagged VHL (54 to 213 residues)/ELoC (17 to 112 residues)/EloB (1 to 120
+residues)/HIF-1alpha (unknown origin) complex expressed in Escherichia
+coli BL21(DE3). Inhibitory assay described inhibition of His-tagged
+VHL/elongin B/elongin C (unknown origin) interaction with HIF1alpha.
+
+J. Diehl, Claudia, and Alessio Ciulli. "Discovery of Small Molecule
+Ligands for the von Hippel-Lindau (VHL) E3 Ligase and Their Use as
+Inhibitors and PROTAC Degraders." \emph{Chemical Society Reviews}, 19
+Aug.~2022.
+
+https://pubs.rsc.org/en/content/articlehtml/2022/cs/d2cs00387b
+
+
+
+\end{document}
