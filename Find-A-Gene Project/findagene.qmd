@@ -1,0 +1,184 @@
+---
+title: "Find-a-gene Project"
+author: "Izabelle Querubin, iquerubi@ucsd.edu, A16015750"
+format: pdf
+editor: visual
+---
+
+## Q1. **Tell me the name of a protein you are interested in. Include the species and the accession number. This can be a human protein or a protein from any other species as long as its function is known.**
+
+**If you do not have a favorite protein, select human RBP4 or KIF11. Do not use beta globin as this is in the worked example report that I provide you with online.**
+
+Protein: CLOCK
+
+Accession number: NP_004489.1
+
+Species: Homo sapiens
+
+Function known: Encodes a protein that plays a central role in the regulation of circadian rhythms---a transcription factor of the basic helix-loop-helix (bHLH) family, containing DNA binding histone acetyltransferase activity. May be associated with behavioral changes in certain populations, and with obesity and metabolic syndrome.
+
+## Q2. **Perform a BLAST search against a DNA database, such as a database consisting of genomic DNA or ESTs. The BLAST server can be at NCBI or elsewhere. Include details of the BLAST method used, database searched and any limits applied (e.g. Organism).**
+
+Method: TBLASTN (2.71.1) search against nematode ESTs
+
+Database: Expressed sequence tags (est)
+
+Organism: Nematodes (Taxid: 6231)
+
+## **On the BLAST results, clearly indicate a match that represents a protein sequence, encoded from some DNA sequence, that is homologous to your query protein.**
+
+Chosen match: Accession JZ762439, a 789 base pair clone from Meloidogyne incognita (southern root-knot nematode). See below for alignment details.
+
+![](images/1)
+
+![](images/2)
+
+![](images/3)
+
+## Q3. **Gather information about this "novel" protein.**
+
+```{r, comment = "", echo = FALSE}
+
+cat(readLines("sequence.fasta"), sep = "\n")
+
+```
+
+### Chosen sequence:
+
+Name: Hypoxia inducible factor 1 alpha subunit
+
+Species: Meloidogyne incognita;
+
+Eukaryota; Metazoa; Ecdysozoa; Nematoda; Chromadorea; Rhabditida; Tylenchina; Tylenchomorpha; Tylenchoidea; Meloidogynidae; Meloidogyninae; Meloidogyne; Meloidogyne incognita group.
+
+## Q4. **Prove that this gene, and its corresponding protein, are novel. For the purposes of this project, "novel" is defined as follows. Take the protein sequence (your answer to \[Q3\]), and use it as a query in a blastp search of the nr database at NCBI.**
+
+![](images/4)
+
+![](images/5)
+
+![](images/6)
+
+## Q5. **Generate a multiple sequence alignment with your novel protein, your original query protein, and a group of other members of this family from different species.**
+
+### Relabeled sequences:
+
+```{r, comment = "", echo = FALSE}
+
+cat(readLines("seqdump.txt"), sep = "\\n")
+
+```
+
+### Alignment using EBI's MUSCLE:
+
+```{r, comment = "", echo = FALSE}
+
+cat(readLines("muscle.clw"), sep = "\\n")
+
+```
+
+## Q6. **Create a phylogenetic tree, using either a parsimony or distance-based approach. Bootstrapping and tree rooting are optional. Use "simple phylogeny" online from the EBI or any respected phylogeny program (such as MEGA, PAUP, or Phylip). Paste an image of your Cladogram or tree output in your report.**
+
+### Phylogenetic tree using EBI's "Simple Phylogeny" feature.
+
+![](images/Screen%20Shot%202023-06-18%20at%206.03.37%20AM.png)
+
+## Q7. **Generate a sequence identity based heatmap of your aligned sequences using R.**
+
+Read MUSCLE alignment file into Seaview and saved file as FASTA.
+
+```{r, echo = FALSE, fig.align = "center"}
+
+library(bio3d)
+
+muscle_alignment <- read.fasta("muscle.fst")
+
+identity <- seqidentity(muscle_alignment)
+
+heatmap(identity, margins = c(9,9), cexRow = 0.7, cexCol = 0.7)
+
+```
+
+## Q8. **Using R/Bio3D (or an online blast server if you prefer), search the main protein structure database for the most similar atomic resolution structures to your aligned sequences. List the top 3 unique hits (i.e. not hits representing different chains from the same structure) along with their Evalue and sequence identity to your query. Please also add annotation details of these structures.**
+
+First, choose the sequence with the highest identity within the alignment.
+
+```{r}
+sums <- rowSums(identity)
+
+which.max(sums)
+```
+
+In the main protein structure database, use the Wood_White_Butterfly sequence to search for the most similar atomic resolution structure to the aligned sequences.
+
+```{r}
+
+wood_white <- read.fasta("woodwhite.fasta")
+
+hits <- blast.pdb(wood_white, database = "pdb")
+
+head(hits, 3)
+
+```
+
+The top 3 unique hits are 4ZPR_B, 4ZP4_B, and 6E3T_B. Save these to a new dataframe and add annotations: structure ID, method used to solve the structure, resolution, and source organism.
+
+```{r}
+
+three <- hits$hit.tbl[1:3, ]
+
+anno <- pdb.annotate(three$pdb.id)
+
+three_anno <- merge(three, anno, by.x = "pdb.id", by.y = "row.names")
+
+# Only take relevant columns
+
+relevant_colnames <- c("pdb.id", "experimentalTechnique", "resolution", "source", "evalue", "identity")
+
+scan <- match(relevant_colnames, colnames(three_anno))
+
+three_anno_relevant <- three_anno[, scan]
+
+# Split PDB identifier on the underscore
+
+ids <- three_anno_relevant$pdb.id
+
+ids_split <- strsplit(ids, "_")
+
+# [[ is synonymous to \$. They both select an element from a list
+
+three_anno_relevant$pdb.id <- lapply(ids_split, "[[", 1)
+
+three_anno_relevant
+```
+
+I'm not sure why the `pdb.id` column came out as a list; however, individual cells can be viewed (example down below).
+
+```{r}
+cry <- three_anno_relevant[2,1]
+cry
+```
+
+## Q9. **Generate a molecular figure of one of your identified PDB structures using VMD. You can optionally highlight conserved residues that are likely to be functional. Please use a white or transparent background for your figure (i.e. not the default black). Based on sequence similarity. How likely is this structure to be similar to your "novel" protein?**
+
+Molecular figure of 4ZPR downloaded from MolStar.
+
+![](images/4ZPR.png)
+
+The sequence similarity is 49.16% for 4ZPR; therefore, this structure from Mus musculus is only about half likely to be similar to my "novel" protein.
+
+## Q10. **Perform a "Target" search of ChEMBEL with your novel sequence. Are there any Target Associated Assays and ligand efficiency data reported that may be useful starting points for exploring potential inhibition of your novel protein?**
+
+ChEMBL details 3 Binding Assays ([CHEMBL4234786](https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4234786) and [CHEMBL4234788](https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4234788)) and 1 Inhibitory Assay ([CHEMBL4219635](https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4219635)) all in Homo Sapiens.
+
+Ligand efficiency data below:
+
+![](images/newplot.png)
+
+https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4296117/
+
+Binding assay linked a description for affinity to N-terminal His6 tagged VHL (54 to 213 residues)/ELoC (17 to 112 residues)/EloB (1 to 120 residues)/HIF-1alpha (unknown origin) complex expressed in Escherichia coli BL21(DE3). Inhibitory assay described inhibition of His-tagged VHL/elongin B/elongin C (unknown origin) interaction with HIF1alpha.
+
+J. Diehl, Claudia, and Alessio Ciulli. "Discovery of Small Molecule Ligands for the von Hippel-Lindau (VHL) E3 Ligase and Their Use as Inhibitors and PROTAC Degraders." *Chemical Society Reviews*, 19 Aug. 2022.
+
+https://pubs.rsc.org/en/content/articlehtml/2022/cs/d2cs00387b

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Izabelle Querubin, iquerubi@ucsd.edu, A16015750">
+
+<title>Find-a-gene Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="findagene_files/libs/clipboard/clipboard.min.js"></script>
+<script src="findagene_files/libs/quarto-html/quarto.js"></script>
+<script src="findagene_files/libs/quarto-html/popper.min.js"></script>
+<script src="findagene_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="findagene_files/libs/quarto-html/anchor.min.js"></script>
+<link href="findagene_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="findagene_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="findagene_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="findagene_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="findagene_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Find-a-gene Project</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Izabelle Querubin, iquerubi@ucsd.edu, A16015750 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="q1.-tell-me-the-name-of-a-protein-you-are-interested-in.-include-the-species-and-the-accession-number.-this-can-be-a-human-protein-or-a-protein-from-any-other-species-as-long-as-its-function-is-known." class="level2">
+<h2 class="anchored" data-anchor-id="q1.-tell-me-the-name-of-a-protein-you-are-interested-in.-include-the-species-and-the-accession-number.-this-can-be-a-human-protein-or-a-protein-from-any-other-species-as-long-as-its-function-is-known.">Q1. <strong>Tell me the name of a protein you are interested in. Include the species and the accession number. This can be a human protein or a protein from any other species as long as its function is known.</strong></h2>
+<p><strong>If you do not have a favorite protein, select human RBP4 or KIF11. Do not use beta globin as this is in the worked example report that I provide you with online.</strong></p>
+<p>Protein: CLOCK</p>
+<p>Accession number: NP_004489.1</p>
+<p>Species: Homo sapiens</p>
+<p>Function known: Encodes a protein that plays a central role in the regulation of circadian rhythms—a transcription factor of the basic helix-loop-helix (bHLH) family, containing DNA binding histone acetyltransferase activity. May be associated with behavioral changes in certain populations, and with obesity and metabolic syndrome.</p>
+</section>
+<section id="q2.-perform-a-blast-search-against-a-dna-database-such-as-a-database-consisting-of-genomic-dna-or-ests.-the-blast-server-can-be-at-ncbi-or-elsewhere.-include-details-of-the-blast-method-used-database-searched-and-any-limits-applied-e.g.-organism." class="level2">
+<h2 class="anchored" data-anchor-id="q2.-perform-a-blast-search-against-a-dna-database-such-as-a-database-consisting-of-genomic-dna-or-ests.-the-blast-server-can-be-at-ncbi-or-elsewhere.-include-details-of-the-blast-method-used-database-searched-and-any-limits-applied-e.g.-organism.">Q2. <strong>Perform a BLAST search against a DNA database, such as a database consisting of genomic DNA or ESTs. The BLAST server can be at NCBI or elsewhere. Include details of the BLAST method used, database searched and any limits applied (e.g.&nbsp;Organism).</strong></h2>
+<p>Method: TBLASTN (2.71.1) search against nematode ESTs</p>
+<p>Database: Expressed sequence tags (est)</p>
+<p>Organism: Nematodes (Taxid: 6231)</p>
+</section>
+<section id="on-the-blast-results-clearly-indicate-a-match-that-represents-a-protein-sequence-encoded-from-some-dna-sequence-that-is-homologous-to-your-query-protein." class="level2">
+<h2 class="anchored" data-anchor-id="on-the-blast-results-clearly-indicate-a-match-that-represents-a-protein-sequence-encoded-from-some-dna-sequence-that-is-homologous-to-your-query-protein."><strong>On the BLAST results, clearly indicate a match that represents a protein sequence, encoded from some DNA sequence, that is homologous to your query protein.</strong></h2>
+<p>Chosen match: Accession JZ762439, a 789 base pair clone from Meloidogyne incognita (southern root-knot nematode). See below for alignment details.</p>
+<p><img src="https://lh4.googleusercontent.com/5RQJtVXoNZ00bao4POQIIhf-iw8ZTfSWt8yMVirPAEGuJS8cBRZilpwVqdpSaIZpxfv4bJvcnrNQssjuZXU-C4TsryJTEuNSMAv8RQQz5d3mcY3uSDtK7FdT8WW1ZkLGVOtK4eEsSnzobCFw54x3KiY.png" class="img-fluid"></p>
+<p><img src="https://lh5.googleusercontent.com/fysR8RzDr8xBuWwYuGFcVPRXcnwGPNgsOfck-yPItDo6UcDHXuHoTHeX_0fsTJhET49GY-OKQFkF0O2aJXisJb8AJmKMZ6cdrADHScAiNvniFv_76m6LA9g7C-tLtJkYBZD6A6Aq473kXxCQ8G1EpaA.png" class="img-fluid"></p>
+</section>
+<section id="q3.-gather-information-about-this-novel-protein." class="level2">
+<h2 class="anchored" data-anchor-id="q3.-gather-information-about-this-novel-protein.">Q3. <strong>Gather information about this “novel” protein.</strong></h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>&gt;JZ762439.1 NEFSJ21016_D10_.g_078.ab1 Meloidogyne incognita J2 Meloidogyne incognita cDNA, mRNA sequence
+ACGCGCCACACACCGGATATGCGCTTCAGCTACGTCAGCGACGGCTGGAACATTCCGTGCCGCGACGGGC
+ACCGAAAACTCATCGGCACCTCCTTCTACGACCTCGTCTACCCGTCGGACCTGCAGTCAGTGGTCACCTG
+CATGAAGGAGCTGCAGTCCAAGGGCCATTGCCGCACTCCGTTCTACCGCTGGCTCGGCGCGAATGCCTCG
+GTAACGTGGGTCCAGACCGAAGCGACCACCATCAACCACCGCAGCAAGGGCACGAAGGGTTACTATGTGC
+TGTGCACCCATTACGTGCTGGGCAACCAGAACGAGATGGAGTCATGGGAGACGCCGTGCTCAGCGTTCAA
+CTCTGCCGCAAGGCCAGTGATGACCCGCGTCAAGGCGGAGATTGACGACATCTCAGACTACTGCTTCGGA
+CACCAGCAGCCAGGTGTGGAGTGCGTCGATGTTGAGCCACTTGCCGAGTTCTTCCCTCAGTGCTTCGATC
+AGGTGGACCAGCGCTCACGGCAGAAGCCCTATCACCCACGCCATGCCAACATGGGCCTGGACGGCGACAG
+CGAATTCGACGCCGTCCTGCAGTGGCTCTTCCGCGAGGACGATGACGCTCCGCCACAGTGCGACTCTTGC
+CTTACGGTCCCTGCCGGTCGCAGTCGGTGTCAGTCCAATCCCGACGGCATGAAGCGGTCCGCAGCCTACA
+TGGCACAGCAGCAGCCAGCCCCGGCATCGGCCTACGGCTCGGCGTTGGACGTCAATCAGTTGTCGGCGGG
+TGATATCGCGCAGCCGATG</code></pre>
+</div>
+</div>
+<section id="chosen-sequence" class="level3">
+<h3 class="anchored" data-anchor-id="chosen-sequence">Chosen sequence:</h3>
+<p>Name: Hypoxia inducible factor 1 alpha subunit</p>
+<p>Species: Meloidogyne incognita;</p>
+<p>Eukaryota; Metazoa; Ecdysozoa; Nematoda; Chromadorea; Rhabditida; Tylenchina; Tylenchomorpha; Tylenchoidea; Meloidogynidae; Meloidogyninae; Meloidogyne; Meloidogyne incognita group.</p>
+</section>
+</section>
+<section id="q4.-prove-that-this-gene-and-its-corresponding-protein-are-novel.-for-the-purposes-of-this-project-novel-is-defined-as-follows.-take-the-protein-sequence-your-answer-to-q3-and-use-it-as-a-query-in-a-blastp-search-of-the-nr-database-at-ncbi." class="level2">
+<h2 class="anchored" data-anchor-id="q4.-prove-that-this-gene-and-its-corresponding-protein-are-novel.-for-the-purposes-of-this-project-novel-is-defined-as-follows.-take-the-protein-sequence-your-answer-to-q3-and-use-it-as-a-query-in-a-blastp-search-of-the-nr-database-at-ncbi.">Q4. <strong>Prove that this gene, and its corresponding protein, are novel. For the purposes of this project, “novel” is defined as follows. Take the protein sequence (your answer to [Q3]), and use it as a query in a blastp search of the nr database at NCBI.</strong></h2>
+<p><img src="https://lh4.googleusercontent.com/BJoeemyfQpQwsW16u808c8_NzI6gHaw_9VQPhao1XZK-Jiofd7mB4M2ebkXxf5sFlU-FA8fmKJe4cAtr5iZpfRJ6ZvSZOtSiLhWDx9jlauqPLAFIpU7e_euRaDBZzIJFgy8FEIbFxuTXhCDSnzjTPBw.png" class="img-fluid"></p>
+<p><img src="https://lh3.googleusercontent.com/sQkBoT1igCXilU0RsDKKMMRoFAd4jupZ7I6i1zDG34aV9KPdedozCJMdda5OKcnF5-MIXLa9nfokuZCGQ1xlD05fMoX8t-q7G-xYr_wri1r9IZNXiwr85tSoOrP3sPu2fE2X4gocsylbM005WFAgZSU.png" class="img-fluid"></p>
+<p><img src="https://lh4.googleusercontent.com/Vy_7ZzSJ1jec-IHrmIebfDx8cYRWZ9D3rKPDMtv1HHtAxoEu42M5yVh_X67aLYYAO5PCa4S9IvyRdZZO4tYvnhoff2AF99tQURWHUJ9Nx1qlgwghG4PTBRNnb08wiHy5I_PEQyR4-TdNAKO4n8kjIuE.png" class="img-fluid"></p>
+</section>
+<section id="q5.-generate-a-multiple-sequence-alignment-with-your-novel-protein-your-original-query-protein-and-a-group-of-other-members-of-this-family-from-different-species." class="level2">
+<h2 class="anchored" data-anchor-id="q5.-generate-a-multiple-sequence-alignment-with-your-novel-protein-your-original-query-protein-and-a-group-of-other-members-of-this-family-from-different-species.">Q5. <strong>Generate a multiple sequence alignment with your novel protein, your original query protein, and a group of other members of this family from different species.</strong></h2>
+<section id="relabeled-sequences" class="level3">
+<h3 class="anchored" data-anchor-id="relabeled-sequences">Relabeled sequences:</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>&gt;Human | NP_004889.1 circadian locomoter output cycles protein kaput [Homo sapiens]\nMLFTVSCSKMSSIVDRDDSSIFDGLVEEDDKDKAKRVSRNKSEKKRRDQFNVLIKELGSMLPGNARKMDK\nSTVLQKSIDFLRKHKEITAQSDASEIRQDWKPTFLSNEEFTQLMLEALDGFFLAIMTDGSIIYVSESVTS\nLLEHLPSDLVDQSIFNFIPEGEHSEVYKILSTHLLESDSLTPEYLKSKNQLEFCCHMLRGTIDPKEPSTY\nEYVKFIGNFKSLNSVSSSAHNGFEGTIQRTHRPSYEDRVCFVATVRLATPQFIKEMCTVEEPNEEFTSRH\nSLEWKFLFLDHRAPPIIGYLPFEVLGTSGYDYYHVDDLENLAKCHEHLMQYGKGKSCYYRFLTKGQQWIW\nLQTHYYITYHQWNSRPEFIVCTHTVVSYAEVRAERRRELGIEESLPETAADKSQDSGSDNRINTVSLKEA\nLERFDHSPTPSASSRSSRKSSHTAVSDPSSTPTKIPTDTSTPPRQHLPAHEKMVQRRSSFSSQSINSQSV\nGSSLTQPVMSQATNLPIPQGMSQFQFSAQLGAMQHLKDQLEQRTRMIEANIHRQQEELRKIQEQLQMVHG\nQGLQMFLQQSNPGLNFGSVQLSSGNSSNIQQLAPINMQGQVVPTNQIQSGMNTGHIGTTQHMIQQQTLQS\nTSTQSQQNVLSGHSQQTSLPSQTQSTLTAPLYNTMVISQPAAGSMVQIPSSMPQNSTQSAAVTTFTQDRQ\nIRFSQGQQLVTKLVTAPVACGAVMVPSTMLMGQVVTAYPTFATQQQQSQTLSVTQQQQQQSSQEQQLTSV\nQQPSQAQLTQPPQQFLQTSRLLHGNPSTQLILSAAFPLQQSTFPQSHHQQHQSQQQQQLSRHRTDSLPDP\nSKVQPQ\n\n&gt;Southern_Root_Nematode | JZ762439.1 NEFSJ21016_D10_.g_078.ab1 Meloidogyne incognita J2 Meloidogyne incognita cDNA, mRNA sequence,\nKLIGTSFYDLVYPSDLQSVVTCMKELQSKGHCRTPFYRWLGANASVTWVQTEATTINHRSKGTKGYYVLCTHYVLG\n\n&gt;Wood_White_Butterfly | XP_050671994.1 hypoxia-inducible factor 1-alpha-like isoform X5 [Leptidea sinapis]\nMCFNVDGAPCQYTNVVDLEDFMNNEKRKEKSRVAARCRRTKEMQIFAEMTAALPAKKEMVEQLDKSSVMRLAISYLRVRD\nIVSLLPADTEPPKLKSPKGLEEIQSELSYMKALDGFVLVLSQQGDIIYCSDNITEHLGVSQMEIMGQSVFEFSHPCDHEE\nIREALRSNGAGRRDLLLRLKCTLTSKGRNVHIKSASYKVIHMTGHMLTPDKESNNNDEEGKKDLKKPTNGALIAVGRPIP\nHPSNIEVPLDTKTFLTKHSLDMKFTYTDEGLLNALGFESDELVGCSLYDYHHAADSASLVQQFKSLFSKGQCETGQYRFL\nGKSGGYAWIQTQATVITDKQQKPSFVVCVNYVISGIECKDEVFAAHQVQHADLKPAVAALPATAVPICDNPAPANGAIVG\nVILPEEERPIPVTELIFAPREKEMNKGFLMFSQNKGITSEWMLNRDSLVLKDEPEDLTHLAPTAGDAHILLENSPFDMFD\nDFILNDNYCSLLGDDLANGSPVDSLIGDSLLSSPERQENESTGEQSSLLTELSLDAFDSARSDTDIDDGNSPFIPTTDEL\nPVLEPAVMWGALPDSVRQARPQPSEIQSSSPALQRLLVAPPTGPPPQDIITNIYSEQGLIPSRNISSWDTGVKRIMKQEE\nEPTAKRIKRSPTPTPTQTSTSSSVLMNLLVSGCDVDAGYICMVQCRPRHKAKA\n\n&gt;African_Social_Spider | XP_035210551.1 hypoxia-inducible factor 1-alpha-like isoform X1 [Stegodyphus dumicola]\nMCGGKVAIPPIVKEKRRNSEKRKEKSRDAARCRRSKESEIFSDLSGQLPLAPGVASALDKASIMRLTVGYLKVREMMKIL\nIPCGRTVTGSSNDSIYAAVLNGFLLVLSEEGDIIYLSENVEEFIGISQVDMMGHSVYDFSHPCDHEDIKQVLAPKISEKI\nQIKTDNFGRETISFFVRMKSTVKSKGRTMNLKSAAYQVIHYIGHRFDKPRGVEDDDKCPTFYLVFIGKTIPHPAQIDVPL\nDKDIFVSRHSPDMKFTHIDERISEFLGFTNSELIGQSAYSFHHPLDAQTVFSAFKTLFSKGQCETGYYRFLSKYGGYVWL\nVTQATVIYENGTKPECVVCLNYVLSKVENGHEIVSGQQEQSIKEKEEAEDENICVAEEEGSPSEPPVLLSSTRVIFAPKE\nSVMSKDFLNFPDADLQDLDLEPPLEKIPCSVVNSATLNQNVLFQESLKDTKLNLEFDFFQDDPCTLENGISEDPFISYRD\nDSLSSPSYCGTPESSLNLHTSNSTSPDRFNTTPGTPDSGSLSDIPSLDPIDEFSNLDLKFTMPPSASDDSECCDENLDFR\nAPYISMNMDDDFPLISPSSSVMWGPQEPAPKKLPQERLPEIEPQRISPPKQKPVTENLNSSLAALLQSDVKKTPQSKQEK\nNAVARRESNSHKRWSGSSADNNKSSSLKQRPFNPSKGYGNGGHIIMLDSIPVKKQNSKSNASQRRTAQPSASDRRSNSPP\nFGSHTATVKVNDRLIKVQVSVSELPTSPIEHKQPFPSPPDPPPKRTSPSRLGPTESPKRLKVDNGLICSGPQGFASDSVL\nLNLLISGEDASRGYLCSGNSRYSDSKFESAMLSLSSDDSSSKQTNDSSSNCTELLASESELLDFLKISQYDAEVNAPIQS\nSHLLQGDDLLSALDHQPLLRNVPALV\n\n&gt;Domestic_Silk_Moth | XP_037876182.1 hypoxia-inducible factor 1-alpha isoform X4 [Bombyx mori]\nMSTKPANQKRRNNEKRKEKSRVAARCRRTKEMQIFSELTAALPAKKEEVEQLDKASVMRLAISYLRVRDVVSMLPDVNSD\nQSKMQNPEGFEELASELSYMRALDGFVLVLSQQGDIVYCSDNIAEHLGVSQMEIMGQSVFEFSHPCDHDEIREALRTNGG\nARRDLLLRLKCTLTSKGRNVHLKSASYKVIHITGHMLASTEDNERNNNETKADEEKKGKAGCLVAVGRPIPHPSNIEIPL\nDSKTFLSKHSLDMKFTYVDESLLNTLGFGSEELVGRSLYDYHHAADSASMIQQFKSLFSKGQCETGQYRFLAKSGGYSWV\nQTQATVITDKQQKPISVVCVNYIISGIECKDEVFAAHQVQHADLKPKLPAVASPGVSFRAPVEPLANGAIVAIVPPEEER\nPIPVTELIFAPRKKEMNKGFLMFSQDEGLTSEWLFNQSLVLKDEPEDLTHLAPTAGDACIPLENSPFDMFDEFILSDNYC\nSLLGDDLANGSPVDPLAPDPSLLSSPESQENDSSCEQSSLLTELSLDAFDNTRSDEIDDSNSPFIPISDELPVLEPAVMW\nGALPDSVSQARPQPSETHTSPAPALQRLLTGPPPQDLITSIYSDQGLMPSRSISTWDTGVKRVMKEEEEPSAKRVKRSPS\nPVAPKPKSQSSSVLMNLLDIPQQSTPHKQPMKANYQILPNTQMLGLQNVLHRNMQVPIINITQAVPNKHVMRASTPINQM\nRTNMTTGPMSPLSLNIGSPMYSLPSSPNSYSSPAMSPAQRERVMSPYSTPQSLSPVGKFHQMYSPGQRMVSPTGVIQGSD\nPYLTTKMQPSPGFPMQVNDILLDTNVQLPTSDFWADPEFLQGTSDLLTAFDDVKLG\n\n&gt;Ringlet_Butterfly | XP_034834054.1 hypoxia-inducible factor 1-alpha isoform X4 [Maniola hyperantus]\nMIKSEMASKPTNQKRRNNEKRKEKSRVAARCRRTKEMQIFVELTAALPAKKEEVEQLDKASVMRLAISYLRVRDVVSMLP\nEDKEAPKLQSPKGLEEVQSELSYMNALDGFVLVLSQQGDIVYCSENIADHLGVSQMEIMGQSVFEFSHPCDHDEIRESLR\nAGNDGRRDLLLRLKCTLTSKGRNVHLKSASYKVIHVTGHMITPTEEKTKDQDLSTDSDEEKKEVKSYTNTGALVAVGRPI\nPHPSNIETPLNSMTFLTKHSLDMKFTYTDEGLTNSLGFESEELVGRSLYEYHHAADSASLAQQFKSLFSKGQCETGQYRF\nLAKTGGYSWVQTQATVITDKQQKPISVICVNYVISGIECKDEVFAAHQVHHADLKPVVAPAPLIRVSTEPPANGAIVGIV\nAPEEERPIPVTEQIFVPRKKEMNKGFLMFSQNEGLTSESHSNCKSLVLKDEPEDLTHLAPTAGDACISLENNSPFDMFDD\nFMLNDNYCSLLGDDLANGSPVDSLIADSLLSSPEPQETESSCEQSSLLTELSLDAFDNRSDNDIDDGNSPFIPTTDELPL\nLEPAVMWGVLPDSVSQAKPQPSEVQTSAPALQRLLAAPPTGPPPQDIITNIYSDPGLIPSRSVSSWDTGVKRVMKQEEES\nTAKRVKRSPSPAAPTARTPSSSVLMNLLDIHPQAKQQIRQQLRSNYQMSLNTPRTSPQSPVNKNLPVPVINIIRSGPNEP\nLMRANTTAPNPPMIRTSPMSPLTLNVGSPMYSLPSSPNTPNYSPAMSPAQKDRVLSPYSTPQSLSPAGSYMYSPNNKLLS\nPSGVMRGYDPYLNNKMQTSPGFPLQSDMLLDTNMPLASTDFWPDSDMLQGTSDLLTAFDDVKLV\n\n&gt;Corn_Snake | XP_034294080.1 hypoxia-inducible factor 3-alpha isoform X3 [Pantherophis guttatus]\nMSWSKYQRSTTEIRKEKSRDAARCRRSKETEVFYQLAHTLPFARGVSAHLDKASIMRLTISYLRMHKLLNSGEWRDQVKA\nEEQVDSYYLKALDGFLMVLTEEGDMIYLSENVNKHLGLSQLELIGHSVFDFIHPCDQEELQDVLSPRQGFSKKAEVKTER\nNFSLRMKSTLTTRGRTVNLKSATWKVLHCSGHMRSYAPSKPATGKEGEGGFAEPPLRCLVLICEAIPHPANIETPLDSGT\nFLSRHTMDMKFTYCDDRIVEMAGYTSESLLGCSLYEYIHALDSDSVSKSINTLLSKGQAVTGQYRFLARNGGYIWIQTEA\nTVISSSKNSQPESIVCIHFVLSQVEENGLVLSLEQTDRQGEHRRLPPPCLEGLDSDSALEEMDPNGGDTIINLSFELRGP\nKILAFLRPANISEEELQLDPKRFCSPDLQKLLGPIFDPPGTQNSAGGTGRAKPPAPVPKTAPVVKKMSGNHNLSDLPEEL\nIFDMENVQKLFASNKEEQSMETALQDYEGLDLEMLAPYISMDDDFQLSSTDHPPWLTEKRGDPGAGPRPASPPPRPRSRS\nFHGVSPRPPEPAPLPRWGSDSSLSQGRPIETPLANSPCGEGQMVEMVASVKIQSVQDGTGLNGQRSPLGGRKRTREISLD\nEERDLFLETIPPKRAHNHEAEGFLMPSLSLGFLLSVEECLDARSERGCGGTVALGKKLLALEEPMGLLGDMLPFVVDGPA\nLSQLALYDGEEEVSGRGGEHFQLGEELLVELDQAT\n\n&gt;Brown_Spotted_Pit_Viper | XP_029140890.1 hypoxia-inducible factor 3-alpha [Protobothrops mucrosquamatus]\nMPRCVQNMSPEKLGSSSATIGHPNTGEKGSTTEIRKEKSRDAARCRRSKETEVFYQLAHTLPFARGVSAHLDKASIMRLT\nISYLRMHKLLNSGEWRDQVKAEEQVDSYYLKALDGFLMVLTEEGDMIYLSENVNKHLGLSQLELIGHSVFDFIHPCDQEE\nLQDVLSPRQGFSKKGEVKTERNFSLRMKSTLTTRGRTVNLKSATWKVLHCSGHMRCYAPSKPAAGKEGEGGFTEPPLRCL\nVLICEAILHPANIETPLDSGTFLSRHTMDMKFTYCDDRIVEMAGYTSESLLGCSLYEYIHALDSDSVSKSINTLLSKGQA\nVTGQYRFLARNGGYIWIQTEATVISSSKNSQPESIVCMHFVLSQVEENGLVLSLEQTDRQGEHRRLPPPCLEGLDSESAL\nDEMDPNGGDTIINLSFELRGPKILAFLRPANISEEELQLDPKRFCSPDLQKLLGPIFDPPGTQNSAGGAVRAKLPAPIAK\nLAPVVKKASGNHDSAWLPFPLGTLCSPLQDYEGLDLEMLAPYISMDDDFQLSSTDHPPWLAEKRRDPAGAGARPVSPPPR\nPRSRSFHGVSPRPPEAPTLPRWGSDSSLSQGRPVETPLANSPCGEGQMVEMVASVKIQSVQDGAGLNGHRSPLGGKKRAR\nEISLDEERDLFLETSPPKRAHNHEAEGFLMPSLSLGFLLSVEECLDARSERGCGGTVALGKKLLALEEPMGLLGDMLPFV\nVDGPALSQLALYDGEEEVSGRGGEHFQLGEELLVELDQAT</code></pre>
+</div>
+</div>
+</section>
+<section id="alignment-using-ebis-muscle" class="level3">
+<h3 class="anchored" data-anchor-id="alignment-using-ebis-muscle">Alignment using EBI’s MUSCLE:</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>CLUSTAL multiple sequence alignment by MUSCLE (3.8)\n\n\nHuman                        MLFTVSCSKMSSIVDRDDSSIFDGLVEEDDKDKAKRVSRNKSEKK-RRDQFNVLIKELGS\nCorn_Snake                   ----------------------MSWSKYQRSTTEIRKEKSRDAARCRRSKETEVFYQLAH\nBrown_Spotted_Pit_Viper      -MPRCVQNMSPEKLGSSSATIGHPNTGEKGSTTEIRKEKSRDAARCRRSKETEVFYQLAH\nDomestic_Silk_Moth           --------------------MSTKPANQKRRNNEKRKEKSRVAARCRRTKEMQIFSELTA\nWood_White_Butterfly         ---------MCFNVDGAPCQYTNVVDLEDFMNNEKRKEKSRVAARCRRTKEMQIFAEMTA\nRinglet_Butterfly            ---------------MIKSEMASKPTNQKRRNNEKRKEKSRVAARCRRTKEMQIFVELTA\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        --------------MCGGKVAIPPIVKEKRRNSEKRKEKSRDAARCRRSKESEIFSDLSG\n                                                                                         \n\nHuman                        MLP---GNARKMDKSTVLQKSIDFLRKHKEITAQSD-ASEIRQDWKPTFLSNEEFTQLML\nCorn_Snake                   TLPFARGVSAHLDKASIMRLTISYLRMHKLLN---------SGEWRDQVKAEEQVDSYYL\nBrown_Spotted_Pit_Viper      TLPFARGVSAHLDKASIMRLTISYLRMHKLLN---------SGEWRDQVKAEEQVDSYYL\nDomestic_Silk_Moth           ALPAKKEEVEQLDKASVMRLAISYLRVRDVVSMLPDVNSDQSKMQNPEGFEELASELSYM\nWood_White_Butterfly         ALPAKKEMVEQLDKSSVMRLAISYLRVRDIVSLLPA-DTEPPKLKSPKGLEEIQSELSYM\nRinglet_Butterfly            ALPAKKEEVEQLDKASVMRLAISYLRVRDVVSMLPE-DKEAPKLQSPKGLEEVQSELSYM\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        QLPLAPGVASALDKASIMRLTVGYLKVREMMKILIP---------CGRTVTGSSNDSIYA\n                                                                                         \n\nHuman                        EALDGFFLAIMTDGSIIYVSESVTSLLEHLPSDLVDQSIFNFIPEGEHSEVYKILSTHLL\nCorn_Snake                   KALDGFLMVLTEEGDMIYLSENVNKHLGLSQLELIGHSVFDFIHPCDQEELQDVLSPR--\nBrown_Spotted_Pit_Viper      KALDGFLMVLTEEGDMIYLSENVNKHLGLSQLELIGHSVFDFIHPCDQEELQDVLSPR--\nDomestic_Silk_Moth           RALDGFVLVLSQQGDIVYCSDNIAEHLGVSQMEIMGQSVFEFSHPCDHDEIREALRTN--\nWood_White_Butterfly         KALDGFVLVLSQQGDIIYCSDNITEHLGVSQMEIMGQSVFEFSHPCDHEEIREALRSN--\nRinglet_Butterfly            NALDGFVLVLSQQGDIVYCSENIADHLGVSQMEIMGQSVFEFSHPCDHDEIRESLRAG--\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        AVLNGFLLVLSEEGDIIYLSENVEEFIGISQVDMMGHSVYDFSHPCDHEDIKQVLAPKIS\n                                                                                         \n\nHuman                        ESDSLTPEY-LKSKNQLEF---CCHMLRGTIDPKEPSTYEYVKFIGNFKSLNSVSS-SAH\nCorn_Snake                   --QGFSKKAEVKTERNFSLRMKSTLTTRGRTVNLKSATWKVLHCSGHMRSYAPSKPATGK\nBrown_Spotted_Pit_Viper      --QGFSKKGEVKTERNFSLRMKSTLTTRGRTVNLKSATWKVLHCSGHMRCYAPSKPAAGK\nDomestic_Silk_Moth           ----------GGARRDLLLRLKCTLTSKGRNVHLKSASYKVIHITGHMLASTEDNE-RNN\nWood_White_Butterfly         ----------GAGRRDLLLRLKCTLTSKGRNVHIKSASYKVIHMTGHMLTPDKESNNNDE\nRinglet_Butterfly            ----------NDGRRDLLLRLKCTLTSKGRNVHLKSASYKVIHVTGHMITPTEEKTKDQD\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        EKIQIKTDNFGRETISFFVRMKSTVKSKGRTMNLKSAAYQVIHYIGH-----------RF\n                                                                                         \n\nHuman                        NGFEGTIQRTHRPSYEDRVCFVATVRLATPQFIKEMCTVEEP--NEEFTSRHSLEWKFLF\nCorn_Snake                   EGEGGFAEPPLR-------CLVLICEA-----IPHPANIETPLDSGTFLSRHTMDMKFTY\nBrown_Spotted_Pit_Viper      EGEGGFTEPPLR-------CLVLICEA-----ILHPANIETPLDSGTFLSRHTMDMKFTY\nDomestic_Silk_Moth           NETKADEEKKGKAG-----CLVAVGRP-----IPHPSNIEIPLDSKTFLSKHSLDMKFTY\nWood_White_Butterfly         EGKKDLKKPTNG-------ALIAVGRP-----IPHPSNIEVPLDTKTFLTKHSLDMKFTY\nRinglet_Butterfly            LSTDSDEEKKEVKSYTNTGALVAVGRP-----IPHPSNIETPLNSMTFLTKHSLDMKFTY\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        DKPRGVEDDDKCPTF----YLVFIGKT-----IPHPAQIDVPLDKDIFVSRHSPDMKFTH\n                                                                                         \n\nHuman                        LDHRAPPIIGYLPFEVLGTSGYDYYHVDDLENLAKCHEHLMQYGKGKSCYYRFLTKGQQW\nCorn_Snake                   CDDRIVEMAGYTSESLLGCSLYEYIHALDSDSVSKSINTLLSKGQAVTGQYRFLARNGGY\nBrown_Spotted_Pit_Viper      CDDRIVEMAGYTSESLLGCSLYEYIHALDSDSVSKSINTLLSKGQAVTGQYRFLARNGGY\nDomestic_Silk_Moth           VDESLLNTLGFGSEELVGRSLYDYHHAADSASMIQQFKSLFSKGQCETGQYRFLAKSGGY\nWood_White_Butterfly         TDEGLLNALGFESDELVGCSLYDYHHAADSASLVQQFKSLFSKGQCETGQYRFLGKSGGY\nRinglet_Butterfly            TDEGLTNSLGFESEELVGRSLYEYHHAADSASLAQQFKSLFSKGQCETGQYRFLAKTGGY\nSouthern_Root_Nematode       --------------KLIGTSFYDLVYPSDLQSVVTCMKELQSKGHCRTPFYRWLGANASV\nAfrican_Social_Spider        IDERISEFLGFTNSELIGQSAYSFHHPLDAQTVFSAFKTLFSKGQCETGYYRFLSKYGGY\n                                           .::* * *.  :  *  .:    : * . *:  :  **:*      \n\nHuman                        IWLQTHYYITYH-QWNSRPEFIVCTHTVVSYAEVR-----AERRRELGIEE---SLPETA\nCorn_Snake                   IWIQTEATVISS-SKNSQPESIVCIHFVLSQVEENGLVLSLEQTDRQGEHR---RLPPPC\nBrown_Spotted_Pit_Viper      IWIQTEATVISS-SKNSQPESIVCMHFVLSQVEENGLVLSLEQTDRQGEHR---RLPPPC\nDomestic_Silk_Moth           SWVQTQATVIT--DKQQKPISVVCVNYIISGIECKDEVFAAHQVQHADLKP---KLPAVA\nWood_White_Butterfly         AWIQTQATVIT--DKQQKPSFVVCVNYVISGIECKDEVFAAHQVQHADLKPAVAALPATA\nRinglet_Butterfly            SWVQTQATVIT--DKQQKPISVICVNYVISGIECKDEVFAAHQVHHADLKP---VVAPAP\nSouthern_Root_Nematode       TWVQTEATTINHRSKGTKGYYVLCTHYVLG------------------------------\nAfrican_Social_Spider        VWLVTQATVIY--ENGTKPECVVCLNYVLSKVENGHEIVSGQQEQSIKEKE---EAEDEN\n                              *: *        ..  .   ::* : ::.                              \n\nHuman                        ADKSQDSGSDNRINTVSLKEALERFDHSPTPSASSRSSRKSSHTAVSDPSSTPTKIPTDT\nCorn_Snake                   LEGLDSDSAL--------------EEMDPNGGDTIINLSFELRGPKILAFLRPANISEEE\nBrown_Spotted_Pit_Viper      LEGLDSESAL--------------DEMDPNGGDTIINLSFELRGPKILAFLRPANISEEE\nDomestic_Silk_Moth           SPGVSFRAPVEPLANGAIVAIVPPEEERPIPVTELIFAPRKKEMNKGFLMFSQDEGLTSE\nWood_White_Butterfly         VPICDNPAPA----NGAIVGVILPEEERPIPVTELIFAPREKEMNKGFLMFSQNKGITSE\nRinglet_Butterfly            LIRVSTEPPA----NGAIVGIVAPEEERPIPVTEQIFVPRKKEMNKGFLMFSQNEGLTSE\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        ICVAEEEGS-------------PSEPPVLLSSTRVIFAPKESVMSKDFLNFPDADLQDLD\n                                                                                         \n\nHuman                        STPPRQHLP---AHEKMVQRRSSFSSQ----------------------SINSQSVGSSL\nCorn_Snake                   LQLDPKRFC---SPDLQKLLGPIFDPP----------------------GTQNSAGGTGR\nBrown_Spotted_Pit_Viper      LQLDPKRFC---SPDLQKLLGPIFDPP----------------------GTQNSAGGAVR\nDomestic_Silk_Moth           WLFN-QSLVLKDEPEDLTHLAPTAGDACIPLE-NSPFDMFDE-------FILSDNYCSLL\nWood_White_Butterfly         WMLNRDSLVLKDEPEDLTHLAPTAGDAHILLE-NSPFDMFDD-------FILNDNYCSLL\nRinglet_Butterfly            SHSNCKSLVLKDEPEDLTHLAPTAGDACISLENNSPFDMFDD-------FMLNDNYCSLL\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        LEPPLEKIPCSVVNSATLNQNVLFQESLKDTKLNLEFDFFQDDPCTLENGISEDPFISYR\n                                                                                         \n\nHuman                        TQPVMSQATNLPIPQGMSQFQFSAQLGAMQHLKDQLEQRTRMIEANIHRQQEELRKIQEQ\nCorn_Snake                   AKPPAPVPKTAPVVKKMSGNHNLSDLPEELIFDMENVQKLFASN----KEEQSMETALQD\nBrown_Spotted_Pit_Viper      AKLPAPIAKLAPVVKKASGNHDSAWLP---------------------FPLGTLCSPLQD\nDomestic_Silk_Moth           GDDLAN----GSPVDPLAPDPSLLSSPESQENDSSCEQSSLLTE----LSLDAFDNTRSD\nWood_White_Butterfly         GDDLAN----GSPVDSLIGD-SLLSSPERQENESTGEQSSLLTE----LSLDAFDSARSD\nRinglet_Butterfly            GDDLAN----GSPVDSLIAD-SLLSSPEPQETESSCEQSSLLTE----LSLDAFDN-RSD\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        DDSLSSPSYCGTPESSLNLHTSNSTSPDRFNTTPGTPDSGSLSDIPSLDPIDEFSNLDLK\n                                                                                         \n\nHuman                        LQM------------VHGQGLQMFLQ----QSNPGLNFGSVQLSSGNSSNIQQLAPINMQ\nCorn_Snake                   YEG------------LDLEMLAPYIS--MDDDFQLSSTDHPPWLTEKRGDP-GAGPRPAS\nBrown_Spotted_Pit_Viper      YEG------------LDLEMLAPYIS--MDDDFQLSSTDHPPWLAEKRRDPAGAGARPVS\nDomestic_Silk_Moth           -EI------------DDSN--SPFIP--ISDELPVLEP--AVMWGALPDSVSQARPQPSE\nWood_White_Butterfly         TDI------------DDGN--SPFIP--TTDELPVLEP--AVMWGALPDSVRQARPQPSE\nRinglet_Butterfly            NDI------------DDGN--SPFIP--TTDELPLLEP--AVMWGVLPDSVSQAKPQPSE\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        FTMPPSASDDSECCDENLDFRAPYISMNMDDDFPLISPSSSVMWGPQ-------EPAPKK\n                                                                                         \n\nHuman                        GQVVPTNQIQSGMNTGHIGTTQ-----------------HMIQQQTLQSTSTQSQQNVLS\nCorn_Snake                   PPPRPRSRSFHGVSPRPPEPAP------------------LPRWG--------SDSSLSQ\nBrown_Spotted_Pit_Viper      PPPRPRSRSFHGVSPRPPEAP------------------TLPRWG--------SDSSLSQ\nDomestic_Silk_Moth           THTSPAPALQRLL----TGPPPQDLITSIYSDQGLMPSRSISTWDTGVKRVMKEEEEPSA\nWood_White_Butterfly         IQSS-SPALQRLLVAPPTGPPPQDIITNIYSEQGLIPSRNISSWDTGVKRIMKQEEEPTA\nRinglet_Butterfly            VQTS-APALQRLLAAPPTGPPPQDIITNIYSDPGLIPSRSVSSWDTGVKRVMKQEEESTA\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        LPQERLPEIEPQRISPPKQKPVTENLNSSLA--------ALLQSDVKKTPQSKQEKNAVA\n                                                                                         \n\nHuman                        GHSQQTSLP-SQTQSTLTAPLYNTMVISQPAAGSMV--------QIPSSMPQNSTQSAAV\nCorn_Snake                   GRPIETPLANSPCGEGQMVEMVASVKIQSVQDGTGLNGQ---------RSPLGGRKRTRE\nBrown_Spotted_Pit_Viper      GRPVETPLANSPCGEGQMVEMVASVKIQSVQDGAGLNGH---------RSPLGGKKRARE\nDomestic_Silk_Moth           KRVKRSPSPVAPKPKSQSSSVLMNLLDI-PQQSTPHKQPMKANYQILPNTQMLGLQNVLH\nWood_White_Butterfly         KRIKRSPTP-TPTQTSTSSSVLMNLLVSGCDVDAGY------------------------\nRinglet_Butterfly            KRVKRSPSPAAPTARTPSSSVLMNLLDIHPQAKQQIRQQLRSNYQMSLNTPRTSPQSPVN\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        RRESNSHKRWSGSSADNNKSSSLKQRPFNPSKGYGNGGHIIMLDSIPVKKQNSKSNASQR\n                                                                                         \n\nHuman                        TTFTQDRQIRFSQGQQLVTKLVTAPVA--------CGAVMVPSTMLMGQVVTAYPTFATQ\nCorn_Snake                   ISLDEERDLFLETIPPKRAHNHE------------AEGFLMP-SLSLGFLLSVEECLDAR\nBrown_Spotted_Pit_Viper      ISLDEERDLFLETSPPKRAHNHE------------AEGFLMP-SLSLGFLLSVEECLDAR\nDomestic_Silk_Moth           RNMQVPIINITQAVPNKHVMRASTPINQ--MRTNMTTGPMSPLSLNIGSPMYSLPSSPNS\nWood_White_Butterfly         --------------------------------------------------ICMVQCRPRH\nRinglet_Butterfly            KNLPVPVINIIRSGPNEPLMRANTTAPN--PPMI-RTSPMSPLTLNVGSPMYSLPSSPNT\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        RTAQPSASDRRSNSPPFGSHTATVKVNDRLIKVQVSVSELPTSPIEHKQPFPSPPDPPPK\n                                                                                         \n\nHuman                        QQQSQTLSVTQQQQQQSSQEQQLTSVQQPSQAQLTQPPQQFLQTSRLLHGNP---STQLI\nCorn_Snake                   SERGCGGTVALGKKLLALEEPMGLLGDMLPFVVDGPALSQLALYDG--------------\nBrown_Spotted_Pit_Viper      SERGCGGTVALGKKLLALEEPMGLLGDMLPFVVDGPALSQLALYDG--------------\nDomestic_Silk_Moth           -YSSPAMSPAQRERVMSPYSTPQSLSPVGKFHQMYSPGQRMVSPTGVIQGSDPYLTTKMQ\nWood_White_Butterfly         KAKA--------------------------------------------------------\nRinglet_Butterfly            PNYSPAMSPAQKDRVLSPYSTPQSLSPAGSY--MYSPNNKLLSPSGVMRGYDPYLNNKMQ\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        RTSPSRLGPTESPKRLKVDNGLICSGPQG-FASDSVLLNLLISGEDASRGYLCSGNSRYS\n                                                                                         \n\nHuman                        LSAAFPLQQSTFPQSHHQQHQSQQ-------------------------------QQQLS\nCorn_Snake                   --------------------EEEVSGR----------------------------GGEHF\nBrown_Spotted_Pit_Viper      --------------------EEEVSGR----------------------------GGEHF\nDomestic_Silk_Moth           PSPGFPMQVNDILLDTNVQLPTSDFWA----------------------------DPEFL\nWood_White_Butterfly         ------------------------------------------------------------\nRinglet_Butterfly            TSPGFPLQ-SDMLLDTNMPLASTDFWP----------------------------DSDML\nSouthern_Root_Nematode       ------------------------------------------------------------\nAfrican_Social_Spider        DSKFESAMLSLSSDDSSSKQTNDSSSNCTELLASESELLDFLKISQYDAEVNAPIQSSHL\n                                                                                         \n\nHuman                        RHRTDSLPDPSKVQPQ-------\nCorn_Snake                   QLGEELLVELDQAT---------\nBrown_Spotted_Pit_Viper      QLGEELLVELDQAT---------\nDomestic_Silk_Moth           QGTSDLLTAFDDVKLG-------\nWood_White_Butterfly         -----------------------\nRinglet_Butterfly            QGTSDLLTAFDDVKLV-------\nSouthern_Root_Nematode       -----------------------\nAfrican_Social_Spider        LQGDDLLSALDHQPLLRNVPALV\n                                                    </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="q6.-create-a-phylogenetic-tree-using-either-a-parsimony-or-distance-based-approach.-bootstrapping-and-tree-rooting-are-optional.-use-simple-phylogeny-online-from-the-ebi-or-any-respected-phylogeny-program-such-as-mega-paup-or-phylip.-paste-an-image-of-your-cladogram-or-tree-output-in-your-report." class="level2">
+<h2 class="anchored" data-anchor-id="q6.-create-a-phylogenetic-tree-using-either-a-parsimony-or-distance-based-approach.-bootstrapping-and-tree-rooting-are-optional.-use-simple-phylogeny-online-from-the-ebi-or-any-respected-phylogeny-program-such-as-mega-paup-or-phylip.-paste-an-image-of-your-cladogram-or-tree-output-in-your-report.">Q6. <strong>Create a phylogenetic tree, using either a parsimony or distance-based approach. Bootstrapping and tree rooting are optional. Use “simple phylogeny” online from the EBI or any respected phylogeny program (such as MEGA, PAUP, or Phylip). Paste an image of your Cladogram or tree output in your report.</strong></h2>
+<section id="phylogenetic-tree-using-ebis-simple-phylogeny-feature." class="level3">
+<h3 class="anchored" data-anchor-id="phylogenetic-tree-using-ebis-simple-phylogeny-feature.">Phylogenetic tree using EBI’s “Simple Phylogeny” feature.</h3>
+<p><img src="images/Screen%20Shot%202023-06-18%20at%206.03.37%20AM.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="q7.-generate-a-sequence-identity-based-heatmap-of-your-aligned-sequences-using-r." class="level2">
+<h2 class="anchored" data-anchor-id="q7.-generate-a-sequence-identity-based-heatmap-of-your-aligned-sequences-using-r.">Q7. <strong>Generate a sequence identity based heatmap of your aligned sequences using R.</strong></h2>
+<p>Read MUSCLE alignment file into Seaview and saved file as FASTA.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="findagene_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="q8.-using-rbio3d-or-an-online-blast-server-if-you-prefer-search-the-main-protein-structure-database-for-the-most-similar-atomic-resolution-structures-to-your-aligned-sequences.-list-the-top-3-unique-hits-i.e.-not-hits-representing-different-chains-from-the-same-structure-along-with-their-evalue-and-sequence-identity-to-your-query.-please-also-add-annotation-details-of-these-structures." class="level2">
+<h2 class="anchored" data-anchor-id="q8.-using-rbio3d-or-an-online-blast-server-if-you-prefer-search-the-main-protein-structure-database-for-the-most-similar-atomic-resolution-structures-to-your-aligned-sequences.-list-the-top-3-unique-hits-i.e.-not-hits-representing-different-chains-from-the-same-structure-along-with-their-evalue-and-sequence-identity-to-your-query.-please-also-add-annotation-details-of-these-structures.">Q8. <strong>Using R/Bio3D (or an online blast server if you prefer), search the main protein structure database for the most similar atomic resolution structures to your aligned sequences. List the top 3 unique hits (i.e.&nbsp;not hits representing different chains from the same structure) along with their Evalue and sequence identity to your query. Please also add annotation details of these structures.</strong></h2>
+<p>First, choose the sequence with the highest identity within the alignment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sums <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(identity)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(sums)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Wood_White_Butterfly 
+                   5 </code></pre>
+</div>
+</div>
+<p>In the main protein structure database, use the Wood_White_Butterfly sequence to search for the most similar atomic resolution structure to the aligned sequences.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>wood_white <span class="ot">&lt;-</span> <span class="fu">read.fasta</span>(<span class="st">"woodwhite.fasta"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>hits <span class="ot">&lt;-</span> <span class="fu">blast.pdb</span>(wood_white, <span class="at">database =</span> <span class="st">"pdb"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Searching ... please wait (updates every 5 seconds) RID = 8Y9HBKK5013 
+ ................
+ Reporting 37 hits</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(hits, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$hit.tbl
+       queryid subjectids identity alignmentlength mismatches gapopens q.start
+1  Query_61937     4ZPR_B   49.162             358        156        6      22
+2  Query_61937     4ZP4_B   43.454             359        182        5      23
+3  Query_61937     6E3T_B   43.454             359        182        5      23
+4  Query_61937     6E3S_B   43.175             359        183        5      23
+5  Query_61937     7V7L_B   41.257             366        195        7      19
+6  Query_61937     5SY7_B   31.863             408        207        9      27
+7  Query_61937     5SY5_B   30.769             403        201        9      22
+8  Query_61937     4H6J_A   55.556             108         47        1     250
+9  Query_61937     5TBM_A   48.182             110         56        1     249
+11 Query_61937     4WN5_A   50.476             105         51        1     254
+12 Query_61937     1P97_A   47.273             110         57        1     249
+14 Query_61937     3F1N_A   48.182             110         56        1     249
+16 Query_61937     6X21_A   48.182             110         56        1     249
+18 Query_61937     2A24_A   47.664             107         55        1     252
+20 Query_61937     5KIZ_A   45.455             110         59        1     249
+21 Query_61937     4F3L_B   22.995             374        235        9      27
+22 Query_61937     8OSJ_N   23.592             373        233       10      27
+23 Query_61937     4F3L_A   25.556             360        242       10      23
+24 Query_61937     8OSJ_M   25.556             360        242       10      23
+25 Query_61937     8H77_E   23.662             355        218        8      48
+26 Query_61937     7Y04_E   23.380             355        219        8      48
+27 Query_61937     7ZUB_D   25.145             346        199        9      48
+28 Query_61937     7XI4_B   26.453             344        209       13      27
+29 Query_61937     7XI3_B   26.453             344        209       13      27
+30 Query_61937     5Y7Y_A   29.787             141         90        3      29
+31 Query_61937     5V0L_B   30.400             125         80        2      48
+32 Query_61937     5NJ8_A   32.283             127         76        3      48
+33 Query_61937     2KDK_A   29.060             117         81        2     241
+34 Query_61937     7XHV_B   27.528             178        118        5      31
+35 Query_61937     5F5Y_A   32.500              80         53        1     254
+36 Query_61937     5F68_A   32.500              80         53        1     254
+37 Query_61937     6QPJ_A   33.898              59         39        0     110
+19 Query_61937     2A24_A   40.541              37         22        0     128
+10 Query_61937     5TBM_A   40.541              37         22        0     128
+15 Query_61937     3F1N_A   33.333              57         36        1     110
+17 Query_61937     6X21_A   33.333              57         36        1     110
+13 Query_61937     1P97_A   40.541              37         22        0     128
+   q.end s.start s.end    evalue bitscore positives mlog.evalue pdb.id    acc
+1    367       1   344 1.28e-116    354.0     68.44  266.853011 4ZPR_B 4ZPR_B
+2    369      10   359 5.05e-102    317.0     67.69  233.244291 4ZP4_B 4ZP4_B
+3    369      10   359 7.05e-102    317.0     67.69  232.910652 6E3T_B 6E3T_B
+4    369      10   359  1.15e-99    311.0     67.41  227.816162 6E3S_B 6E3S_B
+5    374       3   358  4.37e-91    289.0     63.93  208.060480 7V7L_B 7V7L_B
+6    372       6   404  4.14e-56    197.0     48.77  127.524069 5SY7_B 5SY7_B
+7    368       1   381  1.51e-49    179.0     46.90  112.414560 5SY5_B 5SY5_B
+8    356       3   110  1.62e-37    137.0     75.00   84.713222 4H6J_A 4H6J_A
+9    357       6   115  2.00e-32    122.0     73.64   72.989576 5TBM_A 5TBM_A
+11   357       9   113  1.19e-31    120.0     71.43   71.206185 4WN5_A 4WN5_A
+12   357       3   112  1.99e-31    119.0     73.64   70.692003 1P97_A 1P97_A
+14   357       6   115  3.66e-31    119.0     73.64   70.082675 3F1N_A 3F1N_A
+16   357       6   115  4.03e-31    119.0     73.64   69.986372 6X21_A 6X21_A
+18   357       1   107  4.25e-31    118.0     72.90   69.933219 2A24_A 2A24_A
+20   357       4   113  4.54e-27    107.0     70.00   60.656870 5KIZ_A 5KIZ_A
+21   353      14   381  2.92e-26    112.0     44.65   58.795629 4F3L_B 4F3L_B
+22   353      18   384  5.94e-26    112.0     45.58   58.085503 8OSJ_N 8OSJ_N
+23   361       7   361  6.37e-24    105.0     46.11   53.410443 4F3L_A 4F3L_A
+24   361      10   364  7.31e-24    105.0     46.11   53.272799 8OSJ_M 8OSJ_M
+25   362      60   401  9.11e-23    103.0     42.25   50.750084 8H77_E 8H77_E
+26   362      60   401  1.14e-22    102.0     41.97   50.525844 7Y04_E 7Y04_E
+27   347      53   384  2.57e-22    102.0     42.49   49.712966 7ZUB_D 7ZUB_D
+28   358      10   321  4.83e-14     75.5     41.57   30.661345 7XI4_B 7XI4_B
+29   358      10   321  5.02e-14     75.5     41.57   30.622761 7XI3_B 7XI3_B
+30   161      10   149  6.78e-13     70.9     53.19   28.019629 5Y7Y_A 5Y7Y_A
+31   165      22   146  1.22e-12     69.7     54.40   27.432170 5V0L_B 5V0L_B
+32   165      30   155  2.10e-11     66.2     54.33   24.586499 5NJ8_A 5NJ8_A
+33   355       2   118  1.57e-10     60.5     52.99   22.574775 2KDK_A 2KDK_A
+34   206       5   173  3.47e-09     58.9     48.31   19.479111 7XHV_B 7XHV_B
+35   332       2    81  3.14e-07     50.4     55.00   14.973873 5F5Y_A 5F5Y_A
+36   332       2    81  2.57e-06     47.8     55.00   12.871605 5F68_A 5F68_A
+37   168      11    69  2.00e-03     40.8     59.32    6.214608 6QPJ_A 6QPJ_A
+19   164      15    51  6.00e-03     38.5     62.16    5.115996 2A24_A 2A24_A
+10   164      23    59  7.00e-03     38.5     62.16    4.961845 5TBM_A 5TBM_A
+15   164       3    59  2.90e-02     36.6     50.88    3.540459 3F1N_A 3F1N_A
+17   164       3    59  3.30e-02     36.6     50.88    3.411248 6X21_A 6X21_A
+13   164      20    56  3.60e-02     36.2     62.16    3.324236 1P97_A 1P97_A
+
+$raw
+       queryid subjectids identity alignmentlength mismatches gapopens q.start
+1  Query_61937     4ZPR_B   49.162             358        156        6      22
+2  Query_61937     4ZP4_B   43.454             359        182        5      23
+3  Query_61937     6E3T_B   43.454             359        182        5      23
+4  Query_61937     6E3S_B   43.175             359        183        5      23
+5  Query_61937     7V7L_B   41.257             366        195        7      19
+6  Query_61937     5SY7_B   31.863             408        207        9      27
+7  Query_61937     5SY5_B   30.769             403        201        9      22
+8  Query_61937     4H6J_A   55.556             108         47        1     250
+9  Query_61937     5TBM_A   48.182             110         56        1     249
+10 Query_61937     5TBM_A   40.541              37         22        0     128
+11 Query_61937     4WN5_A   50.476             105         51        1     254
+12 Query_61937     1P97_A   47.273             110         57        1     249
+13 Query_61937     1P97_A   40.541              37         22        0     128
+14 Query_61937     3F1N_A   48.182             110         56        1     249
+15 Query_61937     3F1N_A   33.333              57         36        1     110
+16 Query_61937     6X21_A   48.182             110         56        1     249
+17 Query_61937     6X21_A   33.333              57         36        1     110
+18 Query_61937     2A24_A   47.664             107         55        1     252
+19 Query_61937     2A24_A   40.541              37         22        0     128
+20 Query_61937     5KIZ_A   45.455             110         59        1     249
+21 Query_61937     4F3L_B   22.995             374        235        9      27
+22 Query_61937     8OSJ_N   23.592             373        233       10      27
+23 Query_61937     4F3L_A   25.556             360        242       10      23
+24 Query_61937     8OSJ_M   25.556             360        242       10      23
+25 Query_61937     8H77_E   23.662             355        218        8      48
+26 Query_61937     7Y04_E   23.380             355        219        8      48
+27 Query_61937     7ZUB_D   25.145             346        199        9      48
+28 Query_61937     7XI4_B   26.453             344        209       13      27
+29 Query_61937     7XI3_B   26.453             344        209       13      27
+30 Query_61937     5Y7Y_A   29.787             141         90        3      29
+31 Query_61937     5V0L_B   30.400             125         80        2      48
+32 Query_61937     5NJ8_A   32.283             127         76        3      48
+33 Query_61937     2KDK_A   29.060             117         81        2     241
+34 Query_61937     7XHV_B   27.528             178        118        5      31
+35 Query_61937     5F5Y_A   32.500              80         53        1     254
+36 Query_61937     5F68_A   32.500              80         53        1     254
+37 Query_61937     6QPJ_A   33.898              59         39        0     110
+   q.end s.start s.end    evalue bitscore positives
+1    367       1   344 1.28e-116    354.0     68.44
+2    369      10   359 5.05e-102    317.0     67.69
+3    369      10   359 7.05e-102    317.0     67.69
+4    369      10   359  1.15e-99    311.0     67.41
+5    374       3   358  4.37e-91    289.0     63.93
+6    372       6   404  4.14e-56    197.0     48.77
+7    368       1   381  1.51e-49    179.0     46.90
+8    356       3   110  1.62e-37    137.0     75.00
+9    357       6   115  2.00e-32    122.0     73.64
+10   164      23    59  7.00e-03     38.5     62.16
+11   357       9   113  1.19e-31    120.0     71.43
+12   357       3   112  1.99e-31    119.0     73.64
+13   164      20    56  3.60e-02     36.2     62.16
+14   357       6   115  3.66e-31    119.0     73.64
+15   164       3    59  2.90e-02     36.6     50.88
+16   357       6   115  4.03e-31    119.0     73.64
+17   164       3    59  3.30e-02     36.6     50.88
+18   357       1   107  4.25e-31    118.0     72.90
+19   164      15    51  6.00e-03     38.5     62.16
+20   357       4   113  4.54e-27    107.0     70.00
+21   353      14   381  2.92e-26    112.0     44.65
+22   353      18   384  5.94e-26    112.0     45.58
+23   361       7   361  6.37e-24    105.0     46.11
+24   361      10   364  7.31e-24    105.0     46.11
+25   362      60   401  9.11e-23    103.0     42.25
+26   362      60   401  1.14e-22    102.0     41.97
+27   347      53   384  2.57e-22    102.0     42.49
+28   358      10   321  4.83e-14     75.5     41.57
+29   358      10   321  5.02e-14     75.5     41.57
+30   161      10   149  6.78e-13     70.9     53.19
+31   165      22   146  1.22e-12     69.7     54.40
+32   165      30   155  2.10e-11     66.2     54.33
+33   355       2   118  1.57e-10     60.5     52.99
+34   206       5   173  3.47e-09     58.9     48.31
+35   332       2    81  3.14e-07     50.4     55.00
+36   332       2    81  2.57e-06     47.8     55.00
+37   168      11    69  2.00e-03     40.8     59.32
+
+$url
+                                                                                                                                                                          8Y9HBKK5013 
+"https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Get&amp;FORMAT_OBJECT=Alignment&amp;ALIGNMENT_VIEW=Tabular&amp;RESULTS_FILE=on&amp;FORMAT_TYPE=CSV&amp;ALIGNMENTS=20000&amp;DESCRIPTIONS=20000&amp;RID=8Y9HBKK5013" </code></pre>
+</div>
+</div>
+<p>The top 3 unique hits are 4ZPR_B, 4ZP4_B, and 6E3T_B. Save these to a new dataframe and add annotations: structure ID, method used to solve the structure, resolution, and source organism.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>three <span class="ot">&lt;-</span> hits<span class="sc">$</span>hit.tbl[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>anno <span class="ot">&lt;-</span> <span class="fu">pdb.annotate</span>(three<span class="sc">$</span>pdb.id)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>three_anno <span class="ot">&lt;-</span> <span class="fu">merge</span>(three, anno, <span class="at">by.x =</span> <span class="st">"pdb.id"</span>, <span class="at">by.y =</span> <span class="st">"row.names"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Only take relevant columns</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>relevant_colnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"pdb.id"</span>, <span class="st">"experimentalTechnique"</span>, <span class="st">"resolution"</span>, <span class="st">"source"</span>, <span class="st">"evalue"</span>, <span class="st">"identity"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>scan <span class="ot">&lt;-</span> <span class="fu">match</span>(relevant_colnames, <span class="fu">colnames</span>(three_anno))</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>three_anno_relevant <span class="ot">&lt;-</span> three_anno[, scan]</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Split PDB identifier on the underscore</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>ids <span class="ot">&lt;-</span> three_anno_relevant<span class="sc">$</span>pdb.id</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>ids_split <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(ids, <span class="st">"_"</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># [[ is synonymous to \$. They both select an element from a list</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>three_anno_relevant<span class="sc">$</span>pdb.id <span class="ot">&lt;-</span> <span class="fu">lapply</span>(ids_split, <span class="st">"[["</span>, <span class="dv">1</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>three_anno_relevant</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  pdb.id experimentalTechnique resolution       source    evalue identity
+1   4ZP4                 X-ray      2.355 Mus musculus 5.05e-102   43.454
+2   4ZPR                 X-ray      3.902 Mus musculus 1.28e-116   49.162
+3   6E3T                 X-ray      3.000 Mus musculus 7.05e-102   43.454</code></pre>
+</div>
+</div>
+<p>I’m not sure why the <code>pdb.id</code> column came out as a list; however, individual cells can be viewed (example down below).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cry <span class="ot">&lt;-</span> three_anno_relevant[<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cry</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "4ZPR"</code></pre>
+</div>
+</div>
+</section>
+<section id="q9.-generate-a-molecular-figure-of-one-of-your-identified-pdb-structures-using-vmd.-you-can-optionally-highlight-conserved-residues-that-are-likely-to-be-functional.-please-use-a-white-or-transparent-background-for-your-figure-i.e.-not-the-default-black.-based-on-sequence-similarity.-how-likely-is-this-structure-to-be-similar-to-your-novel-protein" class="level2">
+<h2 class="anchored" data-anchor-id="q9.-generate-a-molecular-figure-of-one-of-your-identified-pdb-structures-using-vmd.-you-can-optionally-highlight-conserved-residues-that-are-likely-to-be-functional.-please-use-a-white-or-transparent-background-for-your-figure-i.e.-not-the-default-black.-based-on-sequence-similarity.-how-likely-is-this-structure-to-be-similar-to-your-novel-protein">Q9. <strong>Generate a molecular figure of one of your identified PDB structures using VMD. You can optionally highlight conserved residues that are likely to be functional. Please use a white or transparent background for your figure (i.e.&nbsp;not the default black). Based on sequence similarity. How likely is this structure to be similar to your “novel” protein?</strong></h2>
+<p>Molecular figure of 4ZPR downloaded from MolStar.</p>
+<p><img src="images/4ZPR.png" class="img-fluid"></p>
+<p>The sequence similarity is 49.16% for 4ZPR; therefore, this structure from Mus musculus is only about half likely to be similar to my “novel” protein.</p>
+</section>
+<section id="q10.-perform-a-target-search-of-chembel-with-your-novel-sequence.-are-there-any-target-associated-assays-and-ligand-efficiency-data-reported-that-may-be-useful-starting-points-for-exploring-potential-inhibition-of-your-novel-protein" class="level2">
+<h2 class="anchored" data-anchor-id="q10.-perform-a-target-search-of-chembel-with-your-novel-sequence.-are-there-any-target-associated-assays-and-ligand-efficiency-data-reported-that-may-be-useful-starting-points-for-exploring-potential-inhibition-of-your-novel-protein">Q10. <strong>Perform a “Target” search of ChEMBEL with your novel sequence. Are there any Target Associated Assays and ligand efficiency data reported that may be useful starting points for exploring potential inhibition of your novel protein?</strong></h2>
+<p>ChEMBL details 3 Binding Assays (<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4234786">CHEMBL4234786</a> and <a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4234788">CHEMBL4234788</a>) and 1 Inhibitory Assay (<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4219635">CHEMBL4219635</a>) all in Homo Sapiens.</p>
+<p>Ligand efficiency data below:</p>
+<p><img src="images/newplot.png" class="img-fluid"></p>
+<p>https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4296117/</p>
+<p>Binding assay linked a description for affinity to N-terminal His6 tagged VHL (54 to 213 residues)/ELoC (17 to 112 residues)/EloB (1 to 120 residues)/HIF-1alpha (unknown origin) complex expressed in Escherichia coli BL21(DE3). Inhibitory assay described inhibition of His-tagged VHL/elongin B/elongin C (unknown origin) interaction with HIF1alpha.</p>
+<p>J. Diehl, Claudia, and Alessio Ciulli. “Discovery of Small Molecule Ligands for the von Hippel-Lindau (VHL) E3 Ligase and Their Use as Inhibitors and PROTAC Degraders.” <em>Chemical Society Reviews</em>, 19 Aug.&nbsp;2022.</p>
+<p>https://pubs.rsc.org/en/content/articlehtml/2022/cs/d2cs00387b</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
